@@ -1,2 +1,3 @@
 include 'awaa-web'
 include 'awaa-services'
+include 'awaa-repository'

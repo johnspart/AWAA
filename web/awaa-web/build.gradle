@@ -39,13 +39,6 @@ repositories {
 dependencies {
 	compile project(':awaa-services')
 	
-	compile 'org.zkoss.zk:zk:8.0.0'
-	compile 'org.zkoss.zk:zul:8.0.0'
-	compile 'org.zkoss.zk:zhtml:8.0.0'
-	compile 'org.zkoss.zk:zkbind:8.0.0'
-	compile 'org.zkoss.zk:zkplus:8.0.0'
-	compile 'org.zkoss.common:zel:8.0.0'
-	compile 'org.zkoss.common:zcommon:8.0.0'
 	
     // The production code uses the SLF4J logging API at compile time
     compile 'org.slf4j:slf4j-api:1.7.12'
