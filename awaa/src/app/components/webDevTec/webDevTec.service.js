@@ -57,10 +57,10 @@
         'logo': 'ui-bootstrap.png'
       },
       {
-        'title': 'Stylus',
-        'url': 'http://learnboost.github.io/stylus/',
-        'description': 'Stylus is a revolutionary new language, providing an efficient, dynamic, and expressive way to generate CSS. Supporting both an indented syntax and regular CSS style.',
-        'logo': 'stylus.png'
+        'title': 'Less',
+        'url': 'http://lesscss.org/',
+        'description': 'Less extends the CSS language, adding features that allow variables, mixins, functions and many other techniques.',
+        'logo': 'less.png'
       }
     ];
 

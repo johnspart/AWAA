@@ -49,8 +49,8 @@
         "module": "ui.bootstrap"
       },
       "cssPreprocessor": {
-        "key": "stylus",
-        "extension": "styl"
+        "key": "less",
+        "extension": "less"
       },
       "jsPreprocessor": {
         "key": "noJsPrepro",
