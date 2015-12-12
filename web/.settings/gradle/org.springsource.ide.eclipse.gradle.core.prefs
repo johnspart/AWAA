@@ -1,5 +1,5 @@
 #org.springsource.ide.eclipse.gradle.core.preferences.GradleProjectPreferences
-#Thu Dec 03 09:42:28 COT 2015
-build.family.org.gradle.tooling.model.eclipse.HierarchicalEclipseProject=;awaa-repository;awaa-services;awaa-web;
+#Mon Dec 07 14:28:25 COT 2015
+build.family.org.gradle.tooling.model.eclipse.HierarchicalEclipseProject=;awaa-repository;awaa-services;awaa-utils;awaa-web;
 org.springsource.ide.eclipse.gradle.linkedresources=
 org.springsource.ide.eclipse.gradle.rootprojectloc=

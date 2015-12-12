@@ -1,0 +1,22 @@
+<md-content id="login-view" class="md-whiteframe-z5">
+  <img src="assets/images/vista-admin.png" alt="Vista Administrativa Shapp"/ id="vista-admin-img">
+  <md-card id="login-container">
+    <img src="assets/images/logo.png" alt="Logo Shapp" id="logo">
+    <img src="assets/images/nombre.png" alt="Nombre Shapp" id="nombre">
+    <p>
+      <strong>Ingresa tu usuario</strong>
+      <br>
+      (Se enviará un mensaje al correo electrónico registrado con los pasos para restablecer tu contraseña)
+    </p>
+    <form name="rememberForm" id="login-form">
+      <md-input-container id="name-input">
+        <label>Usuario</label>
+        <input name="name" ng-model="user.name">
+      </md-input-container>
+      <md-button class="md-raised md-primary" id="login-button" ng-click="send()">Enviar</md-button>
+    </form>
+  </md-card>
+</md-content>
+<footer>
+  Deseos a tu alcance
+</footer>

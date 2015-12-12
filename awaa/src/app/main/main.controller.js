@@ -12,7 +12,6 @@
     vm.awesomeThings = [];
     vm.classAnimation = '';
     vm.creationDate = 1449339525743;
-    vm.showToastr = showToastr;
 
     activate();
 
@@ -23,10 +22,6 @@
       }, 4000);
     }
 
-    function showToastr() {
-      toastr.info('Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>');
-      vm.classAnimation = '';
-    }
 
     function getWebDevTec() {
       vm.awesomeThings = webDevTec.getTec();

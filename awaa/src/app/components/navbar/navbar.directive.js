@@ -3,15 +3,15 @@
 
   angular
     .module('awaa')
-    .directive('acmeNavbar', acmeNavbar);
+    .directive('awaaNavbar', awaaNavbar);
 
   /** @ngInject */
-  function acmeNavbar() {
+  function awaaNavbar() {
     var directive = {
       restrict: 'E',
       templateUrl: 'app/components/navbar/navbar.html',
       scope: {
-          creationDate: '='
+        creationDate: '='
       },
       controller: NavbarController,
       controllerAs: 'vm',
@@ -21,11 +21,12 @@
     return directive;
 
     /** @ngInject */
-    function NavbarController(moment) {
+    function NavbarController(moment, $rootScope) {
       var vm = this;
 
-      // "vm.creation" is avaible by directive option "bindToController: true"
-      vm.relativeDate = moment(vm.creationDate).fromNow();
+      vm.abrirMenu = function() {
+        $rootScope.mostrar = 'mostrar';
+      };
     }
   }
 

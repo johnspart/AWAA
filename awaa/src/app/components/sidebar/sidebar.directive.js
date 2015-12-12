@@ -3,10 +3,10 @@
 
   angular
     .module('awaa')
-    .directive('acmeSidebar', acmeSidebar);
+    .directive('awaaSidebar', awaaSidebar);
 
   /** @ngInject */
-  function acmeSidebar() {
+  function awaaSidebar() {
     var directive = {
       restrict: 'E',
       templateUrl: 'app/components/sidebar/sidebar.html',
@@ -21,15 +21,11 @@
     return directive;
 
     /** @ngInject */
-    function SidebarController(moment) {
+    function SidebarController(moment, $rootScope) {
       var vm = this;
 
-      // "vm.creation" is avaible by directive option "bindToController: true"
-      vm.relativeDate = moment(vm.creationDate).fromNow();
-
-      vm.toggleSidebar = function() {
-        vm.toggle = !vm.toggle;
-        moment.put('toggle', vm.toggle);
+      vm.cerrarMenu = function() {
+        $rootScope.mostrar = '';
       };
 
     }

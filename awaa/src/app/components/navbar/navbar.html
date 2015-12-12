@@ -1,21 +1,28 @@
-<nav class="navbar navbar-static-top navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="https://github.com/Swiip/generator-gulp-angular">
-        <span class="glyphicon glyphicon-home"></span> Gulp Angular
-      </a>
+<!-- Header Bar -->
+<div class="row header">
+  <div class="col-xs-12">
+    <div class="user pull-right">
+      <div class="item dropdown">
+        <a class="dropdown-toggle" href="#">
+          <img src="assets/images/yeoman.png">
+        </a>
+      </div>
+      <div class="item dropdown">
+        <a class="dropdown-toggle" href="#" title="{{$root.labels.notificaciones}}">
+          <i class="glyphicon glyphicon-bell"></i>
+        </a>
+      </div>
     </div>
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
-      <ul class="nav navbar-nav">
-        <li class="active"><a ng-href="#">Home</a></li>
-        <li><a ng-href="#">About</a></li>
-        <li><a ng-href="#">Contact</a></li>
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right acme-navbar-text">
-        <li>Application was created {{ vm.relativeDate }}.</li>
-      </ul>
+    <div class="meta">
+      <div class="page">
+        <a class="menu-icon glyphicon glyphicon-menu-hamburger" href="" ng-click="vm.abrirMenu()" title="{{$root.labels.abrMenu}}"/>
+        {{$root.labels.awaa}}
+      </div>
+      <div class="breadcrumb-links">
+        {{$root.labels.inicio}}
+      </div>
     </div>
   </div>
-</nav>
+</div>
+<!-- End Header Bar -->

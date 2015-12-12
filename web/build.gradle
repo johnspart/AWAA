@@ -1,10 +1,18 @@
-subprojects {
-  	apply plugin: "java"
-  	repositories {
-      	mavenCentral()
-  	}
+apply plugin: 'ear'
+apply plugin: 'java'
 
- 	dependencies {        
-    	testCompile "junit:junit:4+"
- 	}
+compileJava {options.encoding = "UTF-8"}
+compileTestJava {options.encoding = "UTF-8"}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+	compile project(path: ':awaa-web', configuration: 'archives')
+    deploy project(path: ':awaa-web', configuration: 'archives')
+}
+
+ear{
+	archiveName = "${baseName}.${extension}"
 }
