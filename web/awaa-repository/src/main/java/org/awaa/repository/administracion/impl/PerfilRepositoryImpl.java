@@ -3,12 +3,18 @@
  */
 package org.awaa.repository.administracion.impl;
 
+import java.util.List;
+
 import org.awaa.dao.GenericDAOImpl;
 import org.awaa.orm.Auditoria;
 import org.awaa.orm.administracion.TPerfil;
 import org.awaa.repository.administracion.PerfilRepository;
 import org.awaa.utils.beans.administracion.Perfil;
 import org.awwa.utils.exeptions.BusinessExeption;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.ProjectionList;
+import org.hibernate.criterion.Projections;
+import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -36,5 +42,17 @@ public class PerfilRepositoryImpl extends GenericDAOImpl<TPerfil, Long> implemen
 		TPerfil tPerfil = super.find(TPerfil.class, perfil.getIdPerfil());
 		if (tPerfil != null)
 			super.delete(tPerfil);
+	}
+
+	@Override
+	public List<Perfil> getPerfiles() throws BusinessExeption {
+		DetachedCriteria dCriteria = DetachedCriteria.forClass(TPerfil.class, "PRF");
+
+		ProjectionList prjLst = Projections.projectionList();
+		prjLst.add(Projections.property("PRF.prfId"), "idPerfil");
+		prjLst.add(Projections.property("PRF.prfPerfil"), "perfil");
+		prjLst.add(Projections.property("PRF.prfDescripcion"), "descripcion");
+
+		return super.findCriteriaDinamico(Perfil.class, dCriteria, Transformers.aliasToBean(Perfil.class), prjLst);
 	}
 }

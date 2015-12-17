@@ -46,10 +46,9 @@ import org.springframework.util.StringUtils;
  * 
  * @author John
  */
-@Transactional
 @Repository("GenericDAO")
-public class GenericDAOImpl<T, Key extends Serializable> implements
-		GenericDAO<T, Key> {
+@Transactional
+public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T, Key> {
 
 	/**
 	 * variable que contrala la session con la base de datos
@@ -66,6 +65,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 	 * 
 	 * @return CurrentSession
 	 */
+	@Transactional
 	protected Session getSession() {
 		return this.sessionFactory.getCurrentSession();
 	}
@@ -134,8 +134,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 	 */
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public <Z, CKey extends Serializable> Z find(Class<Z> clazz,
-			Class<CKey> cKey, CKey id) throws BusinessExeption {
+	public <Z, CKey extends Serializable> Z find(Class<Z> clazz, Class<CKey> cKey, CKey id) throws BusinessExeption {
 		Z resultado = null;
 		try {
 			resultado = ((Z) this.getSession().get(clazz, id));
@@ -168,8 +167,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 	public List<T> findAllByExample(T ejemplo) throws BusinessExeption {
 		List<T> resultados = null;
 		try {
-			Criteria criteria = this.getSession().createCriteria(
-					ejemplo.getClass());
+			Criteria criteria = this.getSession().createCriteria(ejemplo.getClass());
 			criteria.add(Example.create(ejemplo));
 			resultados = criteria.list();
 		} catch (Exception ex) {
@@ -186,8 +184,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 	public T findByExample(T ejemplo) throws BusinessExeption {
 		T result = null;
 		try {
-			Criteria criteria = this.getSession().createCriteria(
-					ejemplo.getClass());
+			Criteria criteria = this.getSession().createCriteria(ejemplo.getClass());
 			criteria.add(Example.create(ejemplo));
 			criteria.setMaxResults(1);
 			result = (T) criteria.uniqueResult();
@@ -255,8 +252,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 	 * {@inheritDoc}
 	 */
 	@Transactional(propagation = Propagation.REQUIRED)
-	public Integer saveOrUpdateSql(Class<T> clazz, final String sql)
-			throws BusinessExeption {
+	public Integer saveOrUpdateSql(Class<T> clazz, final String sql) throws BusinessExeption {
 		try {
 
 			Query q = getSession().createSQLQuery(sql);
@@ -273,17 +269,14 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 	 * {@inheritDoc}
 	 */
 	@Transactional(propagation = Propagation.REQUIRED)
-	public Integer editHQL(final String hql, Map<String, Object> params)
-			throws BusinessExeption {
+	public Integer editHQL(final String hql, Map<String, Object> params) throws BusinessExeption {
 		try {
 
 			Query q = this.getSession().createQuery(hql);
 			if (params != null) {
-				Iterator<Entry<String, Object>> itParams = params.entrySet()
-						.iterator();
+				Iterator<Entry<String, Object>> itParams = params.entrySet().iterator();
 				while (itParams.hasNext()) {
-					Map.Entry<String, Object> e = (Map.Entry<String, Object>) itParams
-							.next();
+					Map.Entry<String, Object> e = (Map.Entry<String, Object>) itParams.next();
 					q.setParameter(e.getKey(), e.getValue());
 				}
 			}
@@ -301,11 +294,9 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 	 */
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	@SuppressWarnings("unchecked")
-	public List<T> findAll(Class<T> clazz, String filter)
-			throws BusinessExeption {
+	public List<T> findAll(Class<T> clazz, String filter) throws BusinessExeption {
 		try {
-			StringBuilder sb = new StringBuilder("from ").append(clazz
-					.getSimpleName());
+			StringBuilder sb = new StringBuilder("from ").append(clazz.getSimpleName());
 			if (!StringUtils.isEmpty(filter)) {
 				sb.append(" where ").append(filter);
 			}
@@ -321,11 +312,9 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 	 */
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	@SuppressWarnings("unchecked")
-	public List<T> findAllSql(final Class<T> clazz, final String sql)
-			throws BusinessExeption {
+	public List<T> findAllSql(final Class<T> clazz, final String sql) throws BusinessExeption {
 		try {
-			Query query = this.getSession().createSQLQuery(sql)
-					.addEntity(clazz);
+			Query query = this.getSession().createSQLQuery(sql).addEntity(clazz);
 			return query.list();
 		} catch (Exception ex) {
 			handleException(ex);
@@ -339,8 +328,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	@Override
-	public List<T> findSql(Class<T> clazz, final String sql,
-			final Map<String, Object> params) throws BusinessExeption {
+	public List<T> findSql(Class<T> clazz, final String sql, final Map<String, Object> params) throws BusinessExeption {
 		try {
 			Query qr = this.getSession().createSQLQuery(sql).addEntity(clazz);
 			for (Entry<String, Object> parm : params.entrySet()) {
@@ -360,11 +348,10 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	@Override
-	public <Z> List<Z> findSqlBean(Class<Z> clazz, final String sql,
-			final Map<String, Object> params) throws BusinessExeption {
+	public <Z> List<Z> findSqlBean(Class<Z> clazz, final String sql, final Map<String, Object> params)
+			throws BusinessExeption {
 		try {
-			Query qr = this.getSession().createSQLQuery(sql)
-					.setResultTransformer(Transformers.aliasToBean(clazz));
+			Query qr = this.getSession().createSQLQuery(sql).setResultTransformer(Transformers.aliasToBean(clazz));
 			if (params != null) {
 				for (Entry<String, Object> parm : params.entrySet()) {
 					qr.setParameter(parm.getKey(), parm.getValue());
@@ -399,16 +386,13 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public List<T> findHql(Class<T> clazz, String hql,
-			Map<String, Object> params) throws BusinessExeption {
+	public List<T> findHql(Class<T> clazz, String hql, Map<String, Object> params) throws BusinessExeption {
 		try {
 			if (!StringUtils.isEmpty(hql)) {
 				Query q = this.getSession().createQuery(hql);
-				Iterator<Entry<String, Object>> itParams = params.entrySet()
-						.iterator();
+				Iterator<Entry<String, Object>> itParams = params.entrySet().iterator();
 				while (itParams.hasNext()) {
-					Map.Entry<String, Object> e = (Map.Entry<String, Object>) itParams
-							.next();
+					Map.Entry<String, Object> e = (Map.Entry<String, Object>) itParams.next();
 					q.setParameter(e.getKey(), e.getValue());
 				}
 				return q.list();
@@ -426,11 +410,9 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public List<T> findAll(Class<T> clazz, String filter, String Order)
-			throws BusinessExeption {
+	public List<T> findAll(Class<T> clazz, String filter, String Order) throws BusinessExeption {
 		try {
-			StringBuilder sb = new StringBuilder("from ").append(clazz
-					.getSimpleName());
+			StringBuilder sb = new StringBuilder("from ").append(clazz.getSimpleName());
 			if (!StringUtils.isEmpty(filter)) {
 				sb.append(" where ").append(filter);
 			}
@@ -478,8 +460,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public List<T> findAll(Class<T> clazz, Map<String, Object> params)
-			throws BusinessExeption {
+	public List<T> findAll(Class<T> clazz, Map<String, Object> params) throws BusinessExeption {
 		try {
 			DetachedCriteria crit = DetachedCriteria.forClass(clazz);
 			if (params != null) {
@@ -487,13 +468,10 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 				Iterator<Entry<String, Object>> itParams = setParams.iterator();
 				while (null != itParams && itParams.hasNext()) {
 					Entry<String, Object> entry = itParams.next();
-					if (String.class.isAssignableFrom(entry.getValue()
-							.getClass())) {
-						crit.add(Restrictions.like(entry.getKey(),
-								entry.getValue()));
+					if (String.class.isAssignableFrom(entry.getValue().getClass())) {
+						crit.add(Restrictions.like(entry.getKey(), entry.getValue()));
 					} else {
-						crit.add(Restrictions.eq(entry.getKey(),
-								entry.getValue()));
+						crit.add(Restrictions.eq(entry.getKey(), entry.getValue()));
 					}
 				}
 			}
@@ -511,8 +489,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public List<T> findAll(Class<T> clazz, Map<String, Object> params,
-			String orderProperty) throws BusinessExeption {
+	public List<T> findAll(Class<T> clazz, Map<String, Object> params, String orderProperty) throws BusinessExeption {
 		try {
 			DetachedCriteria crit = DetachedCriteria.forClass(clazz);
 			Set<Entry<String, Object>> setParams = params.entrySet();
@@ -542,8 +519,8 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public List<T> findAll(Class<T> clazz, Map<String, Object> params,
-			String orderProperty, boolean desc) throws BusinessExeption {
+	public List<T> findAll(Class<T> clazz, Map<String, Object> params, String orderProperty, boolean desc)
+			throws BusinessExeption {
 		try {
 			DetachedCriteria crit = DetachedCriteria.forClass(clazz);
 			Set<Entry<String, Object>> setParams = params.entrySet();
@@ -557,8 +534,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 				}
 			}
 			if (!StringUtils.isEmpty(orderProperty)) {
-				crit.addOrder(desc ? Order.desc(orderProperty) : Order
-						.asc(orderProperty));
+				crit.addOrder(desc ? Order.desc(orderProperty) : Order.asc(orderProperty));
 			}
 			Criteria criteria = crit.getExecutableCriteria(this.getSession());
 
@@ -590,8 +566,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 	 */
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public <Z> void saveOrUpdateAll(Class<Z> clazz, List<Z> listaElementos)
-			throws BusinessExeption {
+	public <Z> void saveOrUpdateAll(Class<Z> clazz, List<Z> listaElementos) throws BusinessExeption {
 		try {
 			// this.startOperation();
 			for (Z z : listaElementos) {
@@ -608,15 +583,13 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 	 */
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	@SuppressWarnings("unchecked")
-	public List<T> executeNameQuery(String queryName,
-			String[] nombreParametros, Object[] valoresParametros)
+	public List<T> executeNameQuery(String queryName, String[] nombreParametros, Object[] valoresParametros)
 			throws BusinessExeption {
 		try {
 			Query queryObject = this.getSession().getNamedQuery(queryName);
 			if (valoresParametros != null) {
 				for (int i = 0; i < valoresParametros.length; i++) {
-					applyNamedParameterToQuery(queryObject,
-							nombreParametros[i], valoresParametros[i]);
+					applyNamedParameterToQuery(queryObject, nombreParametros[i], valoresParametros[i]);
 				}
 			}
 			return queryObject.list();
@@ -649,12 +622,10 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	@Override
-	public List<T> findCriteriaDinamico(DetachedCriteria detachedCriteria)
-			throws BusinessExeption {
+	public List<T> findCriteriaDinamico(DetachedCriteria detachedCriteria) throws BusinessExeption {
 
 		try {
-			Criteria criteria = detachedCriteria.getExecutableCriteria(this
-					.getSession());
+			Criteria criteria = detachedCriteria.getExecutableCriteria(this.getSession());
 
 			return new ArrayList<T>(criteria.list());
 		} catch (Exception ex) {
@@ -669,12 +640,10 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 	 */
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	@Override
-	public boolean findCriteriaDinamicoExist(DetachedCriteria detachedCriteria)
-			throws BusinessExeption {
+	public boolean findCriteriaDinamicoExist(DetachedCriteria detachedCriteria) throws BusinessExeption {
 
 		try {
-			Criteria criteria = detachedCriteria.getExecutableCriteria(this
-					.getSession());
+			Criteria criteria = detachedCriteria.getExecutableCriteria(this.getSession());
 			criteria.setMaxResults(1);
 			return criteria.uniqueResult() != null;
 		} catch (Exception ex) {
@@ -690,13 +659,11 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	@Override
-	public List<T> findCriteriaDinamico(DetachedCriteria detachedCriteria,
-			int limit) throws BusinessExeption {
+	public List<T> findCriteriaDinamico(DetachedCriteria detachedCriteria, int limit) throws BusinessExeption {
 
 		List<T> tmpLst = new ArrayList<T>();
 		try {
-			Criteria executableCriteria = detachedCriteria
-					.getExecutableCriteria(this.getSession());
+			Criteria executableCriteria = detachedCriteria.getExecutableCriteria(this.getSession());
 			if (limit > 0) {
 				executableCriteria.setMaxResults(limit);
 			}
@@ -716,15 +683,13 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	@Override
-	public <Z> List<Z> findCriteriaDinamico(Class<Z> clazz,
-			Projection projections, DetachedCriteria detachedCriteria,
+	public <Z> List<Z> findCriteriaDinamico(Class<Z> clazz, Projection projections, DetachedCriteria detachedCriteria,
 			int pageSize, int page) throws BusinessExeption {
 		detachedCriteria.setProjection(projections);
 		detachedCriteria.setResultTransformer(Transformers.aliasToBean(clazz));
 		List<Z> tmpLst = new ArrayList<Z>();
 		try {
-			Criteria executableCriteria = detachedCriteria
-					.getExecutableCriteria(this.getSession());
+			Criteria executableCriteria = detachedCriteria.getExecutableCriteria(this.getSession());
 
 			if (page > 0) {
 				executableCriteria.setFirstResult((page - 1) * pageSize);
@@ -746,15 +711,13 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	@Override
-	public <Z> List<Z> findCriteriaDinamico(Class<Z> clazz,
-			DetachedCriteria detachedCriteria, ResultTransformer transformers,
-			Projection projections) throws BusinessExeption {
+	public <Z> List<Z> findCriteriaDinamico(Class<Z> clazz, DetachedCriteria detachedCriteria,
+			ResultTransformer transformers, Projection projections) throws BusinessExeption {
 		detachedCriteria.setProjection(projections);
 		detachedCriteria.setResultTransformer(transformers);
 		List<Z> tmpLst = new ArrayList<Z>();
 		try {
-			Criteria executableCriteria = detachedCriteria
-					.getExecutableCriteria(this.getSession());
+			Criteria executableCriteria = detachedCriteria.getExecutableCriteria(this.getSession());
 
 			return executableCriteria.list();
 		} catch (Exception ex) {
@@ -772,12 +735,10 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	@Override
-	public T findCriteriaDinamicouniqueResult(
-			DetachedCriteria detachedCriteria, int pageSize, int page)
+	public T findCriteriaDinamicouniqueResult(DetachedCriteria detachedCriteria, int pageSize, int page)
 			throws BusinessExeption {
 		try {
-			Criteria executableCriteria = detachedCriteria
-					.getExecutableCriteria(this.getSession());
+			Criteria executableCriteria = detachedCriteria.getExecutableCriteria(this.getSession());
 			if (page > 0) {
 				executableCriteria.setFirstResult((page - 1) * pageSize);
 			}
@@ -797,18 +758,15 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	@Override
-	public <Z> Z findCriteriaDinamicouniqueResult(Class<Z> Z,
-			DetachedCriteria detachedCriteria,
-			ResultTransformer resultTransformer, Projection projection)
-			throws BusinessExeption {
+	public <Z> Z findCriteriaDinamicouniqueResult(Class<Z> Z, DetachedCriteria detachedCriteria,
+			ResultTransformer resultTransformer, Projection projection) throws BusinessExeption {
 		try {
 			if (projection != null)
 				detachedCriteria.setProjection(projection);
 			if (resultTransformer != null)
 				detachedCriteria.setResultTransformer(resultTransformer);
 
-			Criteria executableCriteria = detachedCriteria
-					.getExecutableCriteria(this.getSession());
+			Criteria executableCriteria = detachedCriteria.getExecutableCriteria(this.getSession());
 			executableCriteria.setMaxResults(1);
 			return ((Z) executableCriteria.uniqueResult());
 		} catch (Exception ex) {
@@ -826,13 +784,12 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	@Override
-	public List<T> findCriteriaDinamico(DetachedCriteria detachedCriteria,
-			int pageSize, int page) throws BusinessExeption {
+	public List<T> findCriteriaDinamico(DetachedCriteria detachedCriteria, int pageSize, int page)
+			throws BusinessExeption {
 
 		List<T> tmpLst = new ArrayList<T>();
 		try {
-			Criteria executableCriteria = detachedCriteria
-					.getExecutableCriteria(this.getSession());
+			Criteria executableCriteria = detachedCriteria.getExecutableCriteria(this.getSession());
 			if (page > 0) {
 				executableCriteria.setFirstResult((page - 1) * pageSize);
 			}
@@ -853,14 +810,12 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	@Override
-	public <Z> PagingResult<Z> findCriteriaDinamicoPageResult(Class<Z> clazz,
-			DetachedCriteria detachedCriteria, int pageSize, int page)
-			throws BusinessExeption {
+	public <Z> PagingResult<Z> findCriteriaDinamicoPageResult(Class<Z> clazz, DetachedCriteria detachedCriteria,
+			int pageSize, int page) throws BusinessExeption {
 		PagingResult<Z> pagingResult = new PagingResult<Z>();
 		List<Z> tmpLst = new ArrayList<Z>();
 		try {
-			Criteria executableCriteria = detachedCriteria
-					.getExecutableCriteria(this.getSession());
+			Criteria executableCriteria = detachedCriteria.getExecutableCriteria(this.getSession());
 			if (page > 0) {
 				executableCriteria.setFirstResult((page - 1) * pageSize);
 			}
@@ -871,8 +826,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 
 			detachedCriteria.setProjection(Projections.rowCount());
 
-			executableCriteria = detachedCriteria.getExecutableCriteria(this
-					.getSession());
+			executableCriteria = detachedCriteria.getExecutableCriteria(this.getSession());
 			if (page > 0) {
 				executableCriteria.setFirstResult(0);
 			}
@@ -897,14 +851,12 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	@Override
-	public PagingResult<T> findCriteriaDinamicoPageResult(
-			DetachedCriteria detachedCriteria, int pageSize, int page)
+	public PagingResult<T> findCriteriaDinamicoPageResult(DetachedCriteria detachedCriteria, int pageSize, int page)
 			throws BusinessExeption {
 		PagingResult<T> pagingResult = new PagingResult<T>();
 		List<T> tmpLst = new ArrayList<T>();
 		try {
-			Criteria executableCriteria = detachedCriteria
-					.getExecutableCriteria(this.getSession());
+			Criteria executableCriteria = detachedCriteria.getExecutableCriteria(this.getSession());
 			if (page > 0) {
 				executableCriteria.setFirstResult((page - 1) * pageSize);
 			}
@@ -915,8 +867,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 
 			detachedCriteria.setProjection(Projections.rowCount());
 
-			executableCriteria = detachedCriteria.getExecutableCriteria(this
-					.getSession());
+			executableCriteria = detachedCriteria.getExecutableCriteria(this.getSession());
 			if (page > 0) {
 				executableCriteria.setFirstResult(0);
 			}
@@ -942,12 +893,11 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	@Override
-	public List<T> findDetachedCriteriaFirst(DetachedCriteria detachedCriteria,
-			int pageSize, int page) throws BusinessExeption {
+	public List<T> findDetachedCriteriaFirst(DetachedCriteria detachedCriteria, int pageSize, int page)
+			throws BusinessExeption {
 		List<T> tmpLst = new ArrayList<T>();
 		try {
-			Criteria executableCriteria = detachedCriteria
-					.getExecutableCriteria(this.getSession());
+			Criteria executableCriteria = detachedCriteria.getExecutableCriteria(this.getSession());
 			if (page > 0) {
 				executableCriteria.setFirstResult((page - 1) * pageSize);
 			}
@@ -958,8 +908,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 
 			detachedCriteria.setProjection(Projections.rowCount());
 
-			executableCriteria = detachedCriteria.getExecutableCriteria(this
-					.getSession());
+			executableCriteria = detachedCriteria.getExecutableCriteria(this.getSession());
 			Long rwLst = (Long) executableCriteria.uniqueResult();
 
 			List<T> lst = new ArrayList<T>(rwLst.intValue());
@@ -989,8 +938,8 @@ public class GenericDAOImpl<T, Key extends Serializable> implements
 	 * @throws HibernateException
 	 *             if thrown by the Query object
 	 */
-	protected void applyNamedParameterToQuery(Query queryObject,
-			String paramName, Object value) throws HibernateException {
+	protected void applyNamedParameterToQuery(Query queryObject, String paramName, Object value)
+			throws HibernateException {
 
 		if (value instanceof Collection) {
 			queryObject.setParameterList(paramName, (Collection<?>) value);

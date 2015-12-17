@@ -3,6 +3,8 @@
  */
 package org.awaa.services.administracion.impl;
 
+import java.util.List;
+
 import org.awaa.repository.administracion.PerfilRepository;
 import org.awaa.services.administracion.PerfilService;
 import org.awaa.utils.beans.administracion.Perfil;
@@ -28,5 +30,10 @@ public class PerfilServiceImpl implements PerfilService {
 	@Override
 	public void removerPerfil(Perfil perfil) throws BusinessExeption {
 		this.perfilRepository.removerPerfil(perfil);
+	}
+	
+	@Override
+	public List<Perfil> getPerfiles() throws BusinessExeption{
+		return this.perfilRepository.getPerfiles();
 	}
 }
