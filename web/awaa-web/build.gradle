@@ -56,5 +56,7 @@ dependencies {
 	compile 'org.springframework.security:spring-security-core:4.0.3.RELEASE'
 	compile 'org.springframework.security:spring-security-config:4.0.3.RELEASE'
 	compile 'org.springframework:spring-tx:4.2.3.RELEASE'
+	compile 'org.springframework:spring-orm:4.2.3.RELEASE'
+	providedCompile 'org.jboss.spec.javax.servlet:jboss-servlet-api_3.1_spec:1.0.0.Final'
 }
 

@@ -23,7 +23,7 @@ import org.awaa.utils.enums.administracion.Permiso;
  *
  */
 @Entity
-@Table(name = "TPerfilPermiso", catalog = "C_GROUP")
+@Table(name = "TPerfilPermiso", schema = "Administracion")
 public class TPerfilPermiso {
 	@EmbeddedId
 	private TPerfilPermisoId tPerfilPermisoId;

@@ -24,7 +24,7 @@ import org.awaa.orm.Auditoria;
  *
  */
 @Entity
-@Table(name = "TPerfil", catalog = "C_GROUP")
+@Table(name = "TPerfil", schema = "Administracion")
 public class TPerfil {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

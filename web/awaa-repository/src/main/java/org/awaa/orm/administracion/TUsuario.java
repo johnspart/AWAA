@@ -20,7 +20,7 @@ import org.awaa.orm.Auditoria;
  *
  */
 @Entity
-@Table(name = "TUsuario", catalog = "C_GROUP")
+@Table(name = "TUsuario", schema = "Administracion")
 public class TUsuario {
 	@Id
 	@Column(name = "usrUsuario", length = 200)

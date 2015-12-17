@@ -3,7 +3,7 @@ package org.awaa.dao;
 import java.util.List;
 
 /**
- * @author John López
+ * @author john.lopez
  * 
  */
 public class PagingResult<T> {
