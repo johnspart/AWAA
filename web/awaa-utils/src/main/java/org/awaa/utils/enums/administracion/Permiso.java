@@ -12,18 +12,8 @@ import org.springframework.security.core.GrantedAuthority;
 
 public enum Permiso implements GrantedAuthority {
 	// Administracion
-	PERFILES("perfiles"), 
-	USUARIOS("usuarios");
-
-	private String codigo;
-
-	private Permiso(String codigo) {
-		this.codigo = codigo;
-	}
-
-	public String getCodigo() {
-		return this.codigo;
-	}
+	PERFILES, 
+	USUARIOS;
 
 	@Override
 	public String getAuthority() {

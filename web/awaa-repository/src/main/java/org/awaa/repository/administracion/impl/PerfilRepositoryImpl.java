@@ -8,12 +8,15 @@ import java.util.List;
 import org.awaa.dao.GenericDAOImpl;
 import org.awaa.orm.Auditoria;
 import org.awaa.orm.administracion.TPerfil;
+import org.awaa.orm.administracion.TPerfilPermiso;
 import org.awaa.repository.administracion.PerfilRepository;
 import org.awaa.utils.beans.administracion.Perfil;
+import org.awaa.utils.enums.administracion.Permiso;
 import org.awwa.utils.exeptions.BusinessExeption;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
 
@@ -54,5 +57,15 @@ public class PerfilRepositoryImpl extends GenericDAOImpl<TPerfil, Long> implemen
 		prjLst.add(Projections.property("PRF.prfDescripcion"), "descripcion");
 
 		return super.findCriteriaDinamico(Perfil.class, dCriteria, Transformers.aliasToBean(Perfil.class), prjLst);
+	}
+
+	@Override
+	public List<Permiso> getPermisosPerfil(Perfil perfil) throws BusinessExeption {
+		DetachedCriteria dCriteria = DetachedCriteria.forClass(TPerfilPermiso.class, "PFP");
+
+		dCriteria.add(Restrictions.eq("PFP.tPerfilPermisoId.pfpPerfil", perfil.getIdPerfil()));
+
+		return super.findCriteriaDinamico(Permiso.class, dCriteria, DetachedCriteria.PROJECTION,
+				Projections.property("pfpPermiso"));
 	}
 }

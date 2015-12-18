@@ -8,6 +8,7 @@ import java.util.List;
 import org.awaa.repository.administracion.PerfilRepository;
 import org.awaa.services.administracion.PerfilService;
 import org.awaa.utils.beans.administracion.Perfil;
+import org.awaa.utils.enums.administracion.Permiso;
 import org.awwa.utils.exeptions.BusinessExeption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,9 +32,14 @@ public class PerfilServiceImpl implements PerfilService {
 	public void removerPerfil(Perfil perfil) throws BusinessExeption {
 		this.perfilRepository.removerPerfil(perfil);
 	}
-	
+
 	@Override
-	public List<Perfil> getPerfiles() throws BusinessExeption{
+	public List<Perfil> getPerfiles() throws BusinessExeption {
 		return this.perfilRepository.getPerfiles();
+	}
+
+	@Override
+	public List<Permiso> getPermisosPerfil(Perfil perfil) throws BusinessExeption {
+		return this.perfilRepository.getPermisosPerfil(perfil);
 	}
 }
