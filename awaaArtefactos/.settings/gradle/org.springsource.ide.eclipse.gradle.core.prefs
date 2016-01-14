@@ -1,0 +1,7 @@
+#org.springsource.ide.eclipse.gradle.core.preferences.GradleProjectPreferences
+#Thu Jan 14 10:23:48 COT 2016
+build.family.org.gradle.tooling.model.eclipse.HierarchicalEclipseProject=;awaa-repository;awaa-services;awaa-utils;awaa-web;
+org.springsource.ide.eclipse.gradle.classname.enableSorting=false
+org.springsource.ide.eclipse.gradle.classpath.enableSorting=true
+org.springsource.ide.eclipse.gradle.linkedresources=
+org.springsource.ide.eclipse.gradle.rootprojectloc=
