@@ -5,6 +5,8 @@ package org.awaa.spring.config;
 
 import java.util.Arrays;
 
+import org.awaa.controller.security.CorsFilter;
+import org.awaa.controller.security.CsrfHeaderFilter;
 import org.awaa.services.administracion.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +22,10 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 /**
  * @author John
@@ -34,21 +40,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		/*
-		 * http.formLogin().loginPage("/login.html");
-		 * http.formLogin().defaultSuccessUrl("/index.html");
-		 * http.formLogin().failureUrl("/login.html?login_error=1");
-		 * http.formLogin().loginProcessingUrl("/login");
-		 * http.formLogin().usernameParameter("username");
-		 * http.formLogin().passwordParameter("password");
-		 * http.logout().logoutSuccessUrl("/login.html").invalidateHttpSession(
-		 * true).logoutUrl("/logout");
-		 * http.exceptionHandling().accessDeniedPage("/accesoDenegado.html");
-		 * 
-		 * 
-		 */
-		//http.authorizeRequests().antMatchers("/index.html").permitAll().and().formLogin();
-		http.csrf().disable();
+		http.httpBasic();
+		http.authorizeRequests().antMatchers("/**").permitAll();// .authenticated();
+		http.addFilterBefore(new CorsFilter(), ChannelProcessingFilter.class);
+		http.csrf().csrfTokenRepository(csrfTokenRepository());
+		http.formLogin().loginProcessingUrl("/login").usernameParameter("username").passwordParameter("password")
+				.defaultSuccessUrl("/");
+		http.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
+		http.logout().invalidateHttpSession(true).logoutUrl("/logout");
 	}
 
 	@Override
@@ -77,7 +76,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean(name = "BCryptPasswordEncoder")
 	public BCryptPasswordEncoder getBCryptPasswordEncoder() {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+		// System.out.println("--Pass--"+bCryptPasswordEncoder.encode("123456"));
 		return bCryptPasswordEncoder;
+	}
+
+	private CsrfTokenRepository csrfTokenRepository() {
+		HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
+		repository.setHeaderName("X-XSRF-TOKEN");
+		return repository;
 	}
 
 }

@@ -37,6 +37,14 @@ public class UsuarioRepositoryImpl extends GenericDAOImpl<TUsuario, String> impl
 	}
 
 	@Override
+	public String getPassEncode(String user) throws BusinessExeption {
+		DetachedCriteria dCriteria = DetachedCriteria.forClass(TUsuario.class, "USR");
+		dCriteria.add(Restrictions.eq("USR.usrUsuario", user));
+		return super.findCriteriaDinamicouniqueResult(String.class, dCriteria, DetachedCriteria.PROJECTION,
+				Projections.property("USR.usrContrasenna"));
+	}
+
+	@Override
 	public String getNombreUsuario(String usuario) throws BusinessExeption {
 		// TODO Auto-generated method stub
 		return null;

@@ -16,6 +16,9 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  * @author john.lopez
@@ -25,7 +28,16 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @EnableTransactionManagement
 @ComponentScan("org.awaa.*")
-public class WebConfig {
+public class WebConfig extends WebMvcConfigurerAdapter {
+
+	@Override
+	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/**").addResourceLocations("/");
+	}
+
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+	}
 
 	@Bean
 	public SessionFactory sessionFactory() throws IOException {

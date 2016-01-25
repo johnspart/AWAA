@@ -1,10 +1,10 @@
-<md-content id="login-view" class="md-whiteframe-z5">
+<md-content id="login-view" class="md-whiteframe-z5" ng-controller="ForgotCtrl">
   <img src="assets/images/vista-admin.png" alt="Vista Administrativa Shapp"/ id="vista-admin-img">
   <md-card id="login-container">
     <img src="assets/images/logo.png" alt="Logo Shapp" id="logo">
     <img src="assets/images/nombre.png" alt="Nombre Shapp" id="nombre">
     <p>
-      <strong>Ingresa tu usuario</strong>
+      <strong>{{$root.labels.ingUsuario}}</strong>
       <br>
       (Se enviará un mensaje al correo electrónico registrado con los pasos para restablecer tu contraseña)
     </p>

@@ -2,10 +2,37 @@
 <div class="row header">
   <div class="col-xs-12">
     <div class="user pull-right">
-      <div class="item dropdown">
-        <a class="dropdown-toggle" href="#">
+      <div class="dropdown item">
+        <a class="dropdown-toggle" href="#" >
           <img src="assets/images/yeoman.png">
         </a>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li class="dropdown-header">
+            Joe Bloggs
+          </li>
+          <li class="divider"></li>
+          <li class="link">
+            <a href="#">
+              Profile
+            </a>
+          </li>
+          <li class="link">
+            <a href="#">
+              Menu Item
+            </a>
+          </li>
+          <li class="link">
+            <a href="#">
+              Menu Item
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li class="link" ng-show="$root.authenticated">
+            <a a href="" ng-click="logout()">
+              {{$root.labels.salir}}
+            </a>
+          </li>
+        </ul>
       </div>
       <div class="item dropdown">
         <a class="dropdown-toggle" href="#" title="{{$root.labels.notificaciones}}">

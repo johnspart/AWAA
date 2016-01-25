@@ -21,4 +21,6 @@ public interface UsuarioRepository {
 
 	List<Usuario> getUsuarios() throws BusinessExeption;
 
+	String getPassEncode(String user) throws BusinessExeption;
+
 }

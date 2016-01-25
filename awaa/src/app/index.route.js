@@ -13,6 +13,10 @@
         templateUrl: 'app/main/main.html',
         controller: 'MainController',
         controllerAs: 'main'
+      }).state('login', {
+        url: '/login',
+        templateUrl: 'app/components/login/login.html',
+        controller: 'LoginController'
       }).state('forgot', {
         url: '/forgot',
         templateUrl: 'app/components/forgot/forgot.html',

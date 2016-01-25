@@ -4,5 +4,12 @@
   "inicio" : "inicio",
   "notificaciones" : "Notificaciones",
   "abrMenu" : "Abrir Menu",
-  "crrMenu" : "Cerrar Menu"
+  "crrMenu" : "Cerrar Menu",
+  "inicioSession" : "Inicio de sessión",
+  "ingUsuario" : "Ingresa tu usuario",
+  "user" : "Usuario",
+  "pass" : "Conraseña",
+  "acceder" : "Acceder",
+  "crearCuenta" : "Crear cuenta",
+  "crrSession" : "Cerrar sessión"
 }

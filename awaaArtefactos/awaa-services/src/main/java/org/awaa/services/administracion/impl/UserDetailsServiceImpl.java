@@ -38,7 +38,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			e.printStackTrace();
 		}
 
-		return new User(arg0, "", true, true, true, true, mappedAuthorities);
+		try {
+			return new User(arg0, this.usuarioRepository.getPassEncode(arg0), true, true, true, true,
+					mappedAuthorities);
+		} catch (BusinessExeption e) {
+			Logs.getError().debug(e.getMessage(), e);
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

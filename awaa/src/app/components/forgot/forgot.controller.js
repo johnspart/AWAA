@@ -1,15 +1,14 @@
 (function() {
   'use strict';
 
-  function ForgotCtrl($scope, LoginSrvc) {
-    $scope.user = {};
-
-    $scope.send = function() {
-      LoginSrvc.forgot($scope.user.name);
-    };
-  }
-
   angular
-      .module('awaa')
-      .controller('ForgotCtrl', ForgotCtrl);
+    .module('awaa')
+    .controller('ForgotCtrl', ForgotCtrl);
+
+  /** @ngInject */
+  function ForgotCtrl($rootScope) {
+    var vm = this;
+
+
+  }
 })();
