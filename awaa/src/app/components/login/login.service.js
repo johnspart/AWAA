@@ -6,9 +6,10 @@
     .factory('LoginService', LoginService);
 
   function LoginService($rootScope, $http, $state, $cookies, $log, $resource, $location, urlSrv, toastr) {
-    $rootScope.authenticated = true;
+
     function login(credentials) {
       credentials._csrf = $cookies.get('XSRF-TOKEN');
+
       $http.post(urlSrv + 'login', $.param(credentials), {
         headers: {
           "content-type": "application/x-www-form-urlencoded"
@@ -32,6 +33,8 @@
         toastr.error($rootScope.labels.prmInicioSession);
         $rootScope.authenticated = false;
       })
+
+      return $rootScope.authenticated;
     };
     return {
       login: login

@@ -4,7 +4,7 @@
       <h1 class="text-center login-title">{{$root.labels.inicioSession}}</h1>
       <div class="account-wall">
         <img class="profile-img" ng-src="assets/images/login.png" alt="">
-        <div class="alert alert-danger" ng-show="{{$root.authenticate}}">
+        <div class="alert alert-danger" ng-show="vm.error">
           {{$root.labels.usrPassNoVal}}
         </div>
         <form name="loginForm" class="form-signin" ng-submit="vm.login(loginForm)" novalidate>
