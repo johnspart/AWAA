@@ -6,7 +6,7 @@
     .factory('LoginService', LoginService);
 
   function LoginService($rootScope, $http, $state, $cookies, $log, $resource, $location, urlSrv, toastr) {
-
+    $rootScope.authenticated = true;
     function login(credentials) {
       credentials._csrf = $cookies.get('XSRF-TOKEN');
       $http.post(urlSrv + 'login', $.param(credentials), {
@@ -18,16 +18,18 @@
           if ($rootScope.authenticated) {
             $log.debug("Login succeeded");
             $location.path("/");
-            toastr.info('Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>');
+            toastr.info($rootScope.labels.bienvenido);
+            $rootScope.authenticated = true;
           } else {
             $log.debug("Login failed")
             $location.path("/login");
-            toastr.error('Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>');
+            toastr.error($rootScope.labels.usrPassNoVal);
+            $rootScope.authenticated = false;
           }
         });
       }).error(function(data) {
         $location.path("/login");
-        toastr.error('Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>');
+        toastr.error($rootScope.labels.prmInicioSession);
         $rootScope.authenticated = false;
       })
     };
