@@ -23,6 +23,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.access.channel.ChannelProcessingFilter;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
@@ -45,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.addFilterBefore(new CorsFilter(), ChannelProcessingFilter.class);
 		http.csrf().csrfTokenRepository(csrfTokenRepository());
 		http.formLogin().loginProcessingUrl("/login").usernameParameter("username").passwordParameter("password")
-				.defaultSuccessUrl("/");
+				.successHandler(this.authenticationSuccessHandler());
 		http.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
 		http.logout().invalidateHttpSession(true).logoutUrl("/logout");
 	}
@@ -84,6 +85,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
 		repository.setHeaderName("X-XSRF-TOKEN");
 		return repository;
+	}
+
+	@Bean
+	public AuthenticationSuccessHandler authenticationSuccessHandler() {
+		return new UrlAuthenticationSuccessHandler();
 	}
 
 }

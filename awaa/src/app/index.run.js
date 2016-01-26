@@ -44,11 +44,11 @@
       }).success(function(data) {
         authenticate(function() {
           if ($rootScope.authenticated) {
-            $log("Login succeeded");
+            $log.debug("Login succeeded");
             $location.path("/");
             $rootScope.error = false;
           } else {
-            $log("Login failed")
+            $log.debug("Login failed")
             $location.path("/login");
             $rootScope.error = true;
           }
