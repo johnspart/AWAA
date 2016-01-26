@@ -18,7 +18,7 @@
 
     $log.debug('runBlock end');
 
-    var authenticate = function(callback) {
+    $rootScope.authenticate = function(callback) {
       $http.get(urlSrv + 'user').success(function(data) {
         if (data.name) {
           $rootScope.authenticated = true;
@@ -33,33 +33,7 @@
     };
 
 
-    authenticate();
-    $rootScope.credentials = {};
-    $rootScope.login = function() {
-      $rootScope.credentials._csrf = $cookies.get('XSRF-TOKEN');
-      $http.post(urlSrv + 'login', $.param($rootScope.credentials), {
-        headers: {
-          "content-type": "application/x-www-form-urlencoded"
-        }
-      }).success(function(data) {
-        authenticate(function() {
-          if ($rootScope.authenticated) {
-            $log.debug("Login succeeded");
-            $location.path("/");
-            $rootScope.error = false;
-          } else {
-            $log.debug("Login failed")
-            $location.path("/login");
-            $rootScope.error = true;
-          }
-        });
-      }).error(function(data) {
-        $location.path("/login");
-        $rootScope.error = true;
-        $rootScope.authenticated = false;
-      })
-    };
-
+    $rootScope.authenticate();
 
     $rootScope.logout = function() {
       $http.post(urlSrv + 'logout', {}).success(function() {
@@ -70,19 +44,6 @@
       });
     }
 
-
-
-    $http.get(urlSrv + 'token').success(function(token) {
-      $http({
-        url: 'http://localhost:3000',
-        method: 'GET',
-        headers: {
-          'X-Auth-Token': token.token
-        }
-      }).success(function(data) {
-        $rootScope.greeting = data;
-      });
-    })
   }
 
 })();
