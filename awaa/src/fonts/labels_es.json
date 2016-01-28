@@ -18,5 +18,6 @@
   "cmpPassReq": "El campo contraseña es requerido",
   "sEnvEmailResPass": "(Se enviará un mensaje al correo electrónico registrado con los pasos para restablecer tu contraseña)",
   "enviar": "Enviar",
-  "olvPass": "¿Olvidaste tu contraseña?"
+  "olvPass": "¿Olvidaste tu contraseña?",
+  "noExisUser": "¡El usuario no existe!"
 }

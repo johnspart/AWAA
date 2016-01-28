@@ -33,7 +33,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public void sendEmailRestartPass(String usuario) throws BusinessExeption {
 		String email = this.usuarioRepository.getEmail(usuario);
 		if (email == null)
-			throw new BusinessExeption("noExisUser=".concat(usuario));
+			throw new BusinessExeption("noExisUser=".concat(usuario), "noExisUser");
 
 		this.sendEmail.enviar("Restaurar contraseña", this.usuarioRepository.updateUsrRestaurarContrasenna(usuario),
 				email);

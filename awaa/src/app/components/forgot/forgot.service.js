@@ -5,7 +5,7 @@
     .module('awaa')
     .factory('ForgotService', ForgotService);
 
-  function ForgotService($rootScope, $http, $state, $cookies, $log, $resource, $location, urlSrv, toastr) {
+  function ForgotService($http, $log, urlSrv, toastr, labels) {
 
     function forgot(user) {
       $http.post(urlSrv + 'forgot', $.param({
@@ -17,6 +17,7 @@
       }).success(function(data) {
         $log.debug(data);
       }).error(function(data) {
+        toastr.error(labels.getLabel(data.label))
         $log.debug(data);
       })
     }
