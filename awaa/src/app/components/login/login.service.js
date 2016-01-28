@@ -35,7 +35,8 @@
       })
 
       return $rootScope.authenticated;
-    };
+    }
+    
     return {
       login: login
     }

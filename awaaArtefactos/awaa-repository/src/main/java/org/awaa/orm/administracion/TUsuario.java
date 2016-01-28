@@ -34,6 +34,8 @@ public class TUsuario {
 	private String usrNombre;
 	@Column(name = "usrCorreoElectronico", nullable = false, length = 200)
 	private String usrCorreoElectronico;
+	@Column(name = "usrRestaurarContrasenna", nullable = true, length = 100)
+	private String usrRestaurarContrasenna;
 	@Embedded
 	private Auditoria auditoria;
 
@@ -75,6 +77,14 @@ public class TUsuario {
 
 	public void setUsrCorreoElectronico(String usrCorreoElectronico) {
 		this.usrCorreoElectronico = usrCorreoElectronico;
+	}
+
+	public String getUsrRestaurarContrasenna() {
+		return usrRestaurarContrasenna;
+	}
+
+	public void setUsrRestaurarContrasenna(String usrRestaurarContrasenna) {
+		this.usrRestaurarContrasenna = usrRestaurarContrasenna;
 	}
 
 	public Auditoria getAuditoria() {

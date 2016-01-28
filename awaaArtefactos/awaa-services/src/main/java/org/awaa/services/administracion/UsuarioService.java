@@ -16,4 +16,6 @@ public interface UsuarioService {
 
 	List<Usuario> getUsuarios() throws BusinessExeption;
 
+	void sendEmailRestartPass(String usuario) throws BusinessExeption;
+
 }

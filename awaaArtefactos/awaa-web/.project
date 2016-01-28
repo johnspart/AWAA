@@ -3,9 +3,9 @@
 	<name>awaa-web</name>
 	<comment></comment>
 	<projects>
-		<project>awaa-services</project>
 		<project>awaa-repository</project>
 		<project>awaa-utils</project>
+		<project>awaa-services</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

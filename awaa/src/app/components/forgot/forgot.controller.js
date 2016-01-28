@@ -3,12 +3,20 @@
 
   angular
     .module('awaa')
-    .controller('ForgotCtrl', ForgotCtrl);
+    .controller('ForgotController', ForgotController);
 
   /** @ngInject */
-  function ForgotCtrl($rootScope) {
+  function ForgotController($rootScope, ForgotService, toastr) {
     var vm = this;
+    vm.user = '';
 
-
+    vm.send = function(form) {
+      if (form.$valid)
+        ForgotService.forgot(vm.user);
+      else {
+        form.$setDirty(true);
+        toastr.info($rootScope.labels.cmpUsrReq);
+      }
+    };
   }
 })();

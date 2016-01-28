@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.awaa.controller.security;
+package org.awaa.spring.config;
 
 import java.io.IOException;
 

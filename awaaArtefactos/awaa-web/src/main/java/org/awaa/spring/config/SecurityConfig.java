@@ -6,7 +6,6 @@ package org.awaa.spring.config;
 import java.util.Arrays;
 
 import org.awaa.controller.security.CorsFilter;
-import org.awaa.controller.security.CsrfHeaderFilter;
 import org.awaa.services.administracion.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -42,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.httpBasic();
-		http.authorizeRequests().antMatchers("/**").permitAll();// .authenticated();
+		http.authorizeRequests().antMatchers("/login", "/forgot").permitAll();// .authenticated();
 		http.addFilterBefore(new CorsFilter(), ChannelProcessingFilter.class);
 		http.csrf().csrfTokenRepository(csrfTokenRepository());
 		http.formLogin().loginProcessingUrl("/login").usernameParameter("username").passwordParameter("password")

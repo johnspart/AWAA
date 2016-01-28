@@ -16,11 +16,13 @@
       }).state('login', {
         url: '/login',
         templateUrl: 'app/components/login/login.html',
-        controller: 'LoginController'
+        controller: 'LoginController',
+        controllerAs: 'lCtrl'
       }).state('forgot', {
         url: '/forgot',
         templateUrl: 'app/components/forgot/forgot.html',
-        controller: 'ForgotCtrl'
+        controller: 'ForgotController',
+        controllerAs: 'frgCtrl'
       });
 
     $urlRouterProvider.otherwise('/');

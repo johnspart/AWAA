@@ -23,4 +23,8 @@ public interface UsuarioRepository {
 
 	String getPassEncode(String user) throws BusinessExeption;
 
+	String getEmail(String usuario) throws BusinessExeption;
+
+	String updateUsrRestaurarContrasenna(String user) throws BusinessExeption;
+
 }

@@ -15,5 +15,8 @@
   "prmInicioSession": "Se presento un problema en el inicio de sesión. Por favor inténtelo nuevamente",
   "usrPassNoVal": "El usuario y/o contraseña no son válidos",
   "cmpUsrReq": "El campo usuario es requerido",
-  "cmpPassReq": "El campo contraseña es requerido"
+  "cmpPassReq": "El campo contraseña es requerido",
+  "sEnvEmailResPass": "(Se enviará un mensaje al correo electrónico registrado con los pasos para restablecer tu contraseña)",
+  "enviar": "Enviar",
+  "olvPass": "¿Olvidaste tu contraseña?"
 }

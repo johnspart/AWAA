@@ -6,6 +6,7 @@ package org.awaa.spring.config;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.awaa.utils.RandomStringGenerator;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -74,5 +75,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		prop.put("hibernate.transaction.manager_lookup_class",
 				"org.hibernate.transaction.JBossTransactionManagerLookup");
 		return prop;
+	}
+	
+	@Bean
+	public RandomStringGenerator randomStringGenerator(){
+		return new RandomStringGenerator(100);
 	}
 }

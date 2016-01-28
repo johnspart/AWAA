@@ -16,11 +16,11 @@
         vm.error = !LoginService.login(vm.credentials);
       else {
         form.$setDirty(true);
-        toastr.info(toastr.simple().content('Revisa tu usuario o contraseña'));
+        toastr.info($rootScope.labels.usrPassNoVal);
       }
     };
 
-    
+
 
   }
 })();

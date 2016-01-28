@@ -23,9 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
  * @author john
  *
  */
-@RestController()
+@RestController
 @RequestMapping("perfilController")
-public class PerfilesController {
+public class PerfilController {
 	@Autowired
 	private PerfilService perfilService;
 
