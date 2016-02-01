@@ -15,6 +15,7 @@
           'Content-Type': 'application/x-www-form-urlencoded'
         }
       }).success(function(data) {
+        toastr.info(labels.getLabel(data))
         $log.debug(data);
       }).error(function(data) {
         toastr.error(labels.getLabel(data.label))

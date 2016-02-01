@@ -19,5 +19,6 @@
   "sEnvEmailResPass": "(Se enviará un mensaje al correo electrónico registrado con los pasos para restablecer tu contraseña)",
   "enviar": "Enviar",
   "olvPass": "¿Olvidaste tu contraseña?",
-  "noExisUser": "¡El usuario no existe!"
+  "noExisUser": "¡El usuario no existe!",
+  "envEmailVrf" : "Se ha enviado un correo electrónico a tu cuenta de correo, con las instrucciones"
 }

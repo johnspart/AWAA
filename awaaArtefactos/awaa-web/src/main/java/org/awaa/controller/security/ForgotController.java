@@ -25,6 +25,6 @@ public class ForgotController {
 	@RequestMapping(path = "/forgot", name = "/forgot", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, method = RequestMethod.POST)
 	public String restaurarContrasenna(@RequestParam(name = "userName") String user) throws BusinessExeption {
 		this.usuarioService.sendEmailRestartPass(user);
-		return null;
+		return "envEmailVrf";
 	}
 }

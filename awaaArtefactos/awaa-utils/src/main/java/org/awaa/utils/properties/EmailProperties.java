@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-@PropertySource("classpath:org/awaa/utils/properties/email.properties")
+@PropertySource("classpath:/org/awaa/utils/properties/email.properties")
 public class EmailProperties {
 	@Value("${userEmail}")
 	private String userEmail;
