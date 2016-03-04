@@ -35,7 +35,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		if (email == null)
 			throw new BusinessExeption("noExisUser=".concat(usuario), "noExisUser");
 
-		this.sendEmail.enviar("Restaurar contraseña", this.usuarioRepository.updateUsrRestaurarContrasenna(usuario),
+		this.sendEmail.enviar("Restaurar contraseÃ±a", this.usuarioRepository.updateUsrRestaurarContrasenna(usuario),
 				email);
 
 	}

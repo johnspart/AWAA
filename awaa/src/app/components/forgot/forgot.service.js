@@ -5,10 +5,10 @@
     .module('awaa')
     .factory('ForgotService', ForgotService);
 
-  function ForgotService($http, $log, urlSrv, toastr, labels) {
+  function ForgotService($http, $log, $httpParamSerializer, urlSrv, toastr, labels) {
 
     function forgot(user) {
-      $http.post(urlSrv + 'forgot', $.param({
+      $http.post(urlSrv + 'forgot', $httpParamSerializer({
         userName: user
       }), {
         headers: {

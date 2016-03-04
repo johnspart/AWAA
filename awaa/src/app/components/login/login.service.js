@@ -5,16 +5,16 @@
     .module('awaa')
     .factory('LoginService', LoginService);
 
-  function LoginService($rootScope, $http, $state, $cookies, $log, $resource, $location, urlSrv, toastr) {
+  function LoginService($rootScope, $http, $state, $cookies, $log, $httpParamSerializer, $resource, $location, urlSrv, toastr) {
 
     function login(credentials) {
       credentials._csrf = $cookies.get('XSRF-TOKEN');
 
-      $http.post(urlSrv + 'login', $.param(credentials), {
+      $http.post(urlSrv + 'login', $httpParamSerializer(credentials), {
         headers: {
           "content-type": "application/x-www-form-urlencoded"
         }
-      }).success(function(data) {
+      }).success(function() {
         $rootScope.authenticate(function() {
           if ($rootScope.authenticated) {
             $log.debug("Login succeeded");
@@ -28,7 +28,7 @@
             $rootScope.authenticated = false;
           }
         });
-      }).error(function(data) {
+      }).error(function() {
         $location.path("/login");
         toastr.error($rootScope.labels.prmInicioSession);
         $rootScope.authenticated = false;
@@ -36,7 +36,7 @@
 
       return $rootScope.authenticated;
     }
-    
+
     return {
       login: login
     }
