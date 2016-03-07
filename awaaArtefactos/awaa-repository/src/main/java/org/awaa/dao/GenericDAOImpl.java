@@ -668,7 +668,6 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 		}
 		return tmpLst;
 
-		// return this.getSession().findByCriteria(detachedCriteria);
 	}
 
 	/**
@@ -698,7 +697,6 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 		}
 		return tmpLst;
 
-		// return this.getSession().findByCriteria(detachedCriteria);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -718,7 +716,6 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 		}
 		return tmpLst;
 
-		// return this.getSession().findByCriteria(detachedCriteria);
 	}
 
 	/**
@@ -743,7 +740,6 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 		}
 		return null;
 
-		// return this.getSession().findByCriteria(detachedCriteria);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -765,7 +761,6 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 		}
 		return null;
 
-		// return this.getSession().findByCriteria(detachedCriteria);
 	}
 
 	/**
