@@ -11,6 +11,7 @@ package org.awaa.dao;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -304,7 +305,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 		} catch (Exception ex) {
 			handleException(ex);
 		}
-		return null;
+		return Collections.EMPTY_LIST;
 	}
 
 	/**
@@ -319,7 +320,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 		} catch (Exception ex) {
 			handleException(ex);
 		}
-		return null;
+		return Collections.EMPTY_LIST;
 	}
 
 	/**
@@ -339,7 +340,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 		} catch (Exception ex) {
 			handleException(ex);
 		}
-		return null;
+		return Collections.EMPTY_LIST;
 	}
 
 	/**
@@ -362,7 +363,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 		} catch (Exception ex) {
 			handleException(ex);
 		}
-		return null;
+		return Collections.EMPTY_LIST;
 	}
 
 	/**
@@ -378,7 +379,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 		} catch (Exception ex) {
 			handleException(ex);
 		}
-		return null;
+		return Collections.EMPTY_LIST;
 	}
 
 	/**
@@ -402,7 +403,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 		} catch (Exception ex) {
 			handleException(ex);
 		}
-		return null;
+		return Collections.EMPTY_LIST;
 	}
 
 	/**
@@ -423,7 +424,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 		} catch (Exception ex) {
 			handleException(ex);
 		}
-		return null;
+		return Collections.EMPTY_LIST;
 	}
 
 	/**
@@ -481,7 +482,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 		} catch (Exception ex) {
 			handleException(ex);
 		}
-		return null;
+		return Collections.EMPTY_LIST;
 	}
 
 	/**
@@ -511,7 +512,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 		} catch (Exception ex) {
 			handleException(ex);
 		}
-		return null;
+		return Collections.EMPTY_LIST;
 	}
 
 	/**
@@ -542,7 +543,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 		} catch (Exception ex) {
 			handleException(ex);
 		}
-		return null;
+		return Collections.EMPTY_LIST;
 	}
 
 	/**
@@ -551,11 +552,9 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 	@Transactional(propagation = Propagation.REQUIRED)
 	public void saveOrUpdateAll(List<T> listaElementos) throws BusinessExeption {
 		try {
-			// this.startOperation();
 			for (T t : listaElementos) {
 				this.getSession().saveOrUpdate(t);
 			}
-			// this.endOperation();
 		} catch (Exception ex) {
 			handleException(ex);
 		}
@@ -568,11 +567,9 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <Z> void saveOrUpdateAll(Class<Z> clazz, List<Z> listaElementos) throws BusinessExeption {
 		try {
-			// this.startOperation();
 			for (Z z : listaElementos) {
 				this.getSession().saveOrUpdate(z);
 			}
-			// this.endOperation();
 		} catch (Exception ex) {
 			handleException(ex);
 		}
@@ -596,7 +593,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 		} catch (Exception ex) {
 			handleException(ex);
 		}
-		return null;
+		return Collections.EMPTY_LIST;
 	}
 
 	/**
@@ -631,7 +628,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 		} catch (Exception ex) {
 			handleException(ex);
 		}
-		return null;
+		return Collections.EMPTY_LIST;
 	}
 
 	/**
@@ -871,7 +868,6 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 			pagingResult.setRowsCount(rwLst);
 
 		} catch (Exception ex) {
-
 			handleException(ex);
 		}
 		return pagingResult;
