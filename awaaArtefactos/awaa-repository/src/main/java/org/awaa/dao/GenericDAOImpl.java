@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.awaa.dao;
 
 /**
