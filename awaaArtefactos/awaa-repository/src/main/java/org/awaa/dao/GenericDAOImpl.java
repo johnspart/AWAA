@@ -60,8 +60,8 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 	private Transaction transaction;
 
 	/**
-	 * Función encargada de retornal la actual session para realizar
-	 * operaciones con la base de datos
+	 * Función encargada de retornal la actual session para realizar operaciones
+	 * con la base de datos
 	 * 
 	 * @return CurrentSession
 	 */
@@ -629,7 +629,6 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 
 			return new ArrayList<T>(criteria.list());
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			handleException(ex);
 		}
 		return null;
@@ -647,7 +646,6 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 			criteria.setMaxResults(1);
 			return criteria.uniqueResult() != null;
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			handleException(ex);
 		}
 		return false;
@@ -669,7 +667,6 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 			}
 			return executableCriteria.list();
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			handleException(ex);
 		}
 		return tmpLst;
@@ -700,7 +697,6 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 
 			return executableCriteria.list();
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			handleException(ex);
 		}
 		return tmpLst;
@@ -721,7 +717,6 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 
 			return executableCriteria.list();
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			handleException(ex);
 		}
 		return tmpLst;
@@ -747,7 +742,6 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 			}
 			return ((T) executableCriteria.uniqueResult());
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			handleException(ex);
 		}
 		return null;
@@ -770,7 +764,6 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 			executableCriteria.setMaxResults(1);
 			return ((Z) executableCriteria.uniqueResult());
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			handleException(ex);
 		}
 		return null;
@@ -798,7 +791,6 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 			}
 			return executableCriteria.list();
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			handleException(ex);
 		}
 		return tmpLst;
@@ -839,7 +831,6 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 			pagingResult.setRowsCount(rwLst);
 
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			handleException(ex);
 		}
 		return pagingResult;
@@ -880,7 +871,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 			pagingResult.setRowsCount(rwLst);
 
 		} catch (Exception ex) {
-			ex.printStackTrace();
+
 			handleException(ex);
 		}
 		return pagingResult;
@@ -920,7 +911,6 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 			lst.addAll(il, tmpLst);
 			return lst;
 		} catch (Exception ex) {
-			ex.printStackTrace();
 			handleException(ex);
 		}
 		return new ArrayList<T>(0);

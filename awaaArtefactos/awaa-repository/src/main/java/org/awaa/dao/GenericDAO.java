@@ -17,7 +17,6 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projection;
 import org.hibernate.transform.ResultTransformer;
 
-
 public interface GenericDAO<T, Key extends Serializable> {
 
 	/**
@@ -49,14 +48,11 @@ public interface GenericDAO<T, Key extends Serializable> {
 	 * @return
 	 * @throws BusinessExeption
 	 */
-	<Z, CKey extends Serializable> Z find(Class<Z> clazz, Class<CKey> cKey,
-			CKey id) throws BusinessExeption;
+	<Z, CKey extends Serializable> Z find(Class<Z> clazz, Class<CKey> cKey, CKey id) throws BusinessExeption;
 
-	public Integer editHQL(final String hql, Map<String, Object> params)
-			throws BusinessExeption;
+	public Integer editHQL(final String hql, Map<String, Object> params) throws BusinessExeption;
 
-	List<T> findCriteriaDinamico(DetachedCriteria detachedCriteria)
-			throws BusinessExeption;
+	List<T> findCriteriaDinamico(DetachedCriteria detachedCriteria) throws BusinessExeption;
 
 	/**
 	 * Busca todos los elementos.
@@ -91,8 +87,7 @@ public interface GenericDAO<T, Key extends Serializable> {
 	 * @return lista de elementos
 	 * @throws BusinessExeption
 	 */
-	public List<T> findAllSql(Class<T> clazz, final String sql)
-			throws BusinessExeption;
+	public List<T> findAllSql(Class<T> clazz, final String sql) throws BusinessExeption;
 
 	/**
 	 * Busca elementos deacuerdo al hql recibido
@@ -116,8 +111,7 @@ public interface GenericDAO<T, Key extends Serializable> {
 	 * @return valor del cambio
 	 * @throws BusinessExeption
 	 */
-	public Integer saveOrUpdateSql(Class<T> clazz, final String sql)
-			throws BusinessExeption;
+	public Integer saveOrUpdateSql(Class<T> clazz, final String sql) throws BusinessExeption;
 
 	/**
 	 * Busca todos los elementos, aplicando la condiciÃ³n especificada en la
@@ -130,8 +124,7 @@ public interface GenericDAO<T, Key extends Serializable> {
 	 * @return lista de elementos
 	 * @throws BusinessExeption
 	 */
-	List<T> findAll(Class<T> clazz, String filter, String order)
-			throws BusinessExeption;
+	List<T> findAll(Class<T> clazz, String filter, String order) throws BusinessExeption;
 
 	/**
 	 * Busca todos los elementos que cumplan con las condiciones indicadas en el
@@ -140,15 +133,14 @@ public interface GenericDAO<T, Key extends Serializable> {
 	 * @param clazz
 	 *            representa la clase del elemento a buscar
 	 * @param params
-	 *            mapa de <nombre parÃ¡metro, valor> los cuales se aplican a
-	 *            la bÃºsqueda
-	 * @return lista de elementos mapa de <nombre parÃ¡metro, valor> los
-	 *         cuales se aplican a la bÃºsqueda
+	 *            mapa de <nombre parÃ¡metro, valor> los cuales se aplican a la
+	 *            bÃºsqueda
+	 * @return lista de elementos mapa de <nombre parÃ¡metro, valor> los cuales
+	 *         se aplican a la bÃºsqueda
 	 * @return lista de elementos
 	 * @throws BusinessExeption
 	 */
-	List<T> findAll(Class<T> clazz, Map<String, Object> params)
-			throws BusinessExeption;
+	List<T> findAll(Class<T> clazz, Map<String, Object> params) throws BusinessExeption;
 
 	/**
 	 * Busca todos los elementos que cumplan con las condiciones indicadas en el
@@ -157,8 +149,8 @@ public interface GenericDAO<T, Key extends Serializable> {
 	 * @param clazz
 	 *            representa la clase del elemento a buscar
 	 * @param params
-	 *            mapa de <nombre parÃ¡metro, valor> los cuales se aplican a
-	 *            la búsqueda
+	 *            mapa de <nombre parÃ¡metro, valor> los cuales se aplican a la
+	 *            búsqueda
 	 * @param orderProperty
 	 *            nombre del o los atributo por el cual se debe ordenar el
 	 *            resultado. El orden es ascendente
@@ -166,8 +158,7 @@ public interface GenericDAO<T, Key extends Serializable> {
 	 * 
 	 * @throws BusinessExeption
 	 */
-	List<T> findAll(Class<T> clazz, Map<String, Object> params,
-			String orderProperty) throws BusinessExeption;
+	List<T> findAll(Class<T> clazz, Map<String, Object> params, String orderProperty) throws BusinessExeption;
 
 	/**
 	 * @param clazz
@@ -186,8 +177,8 @@ public interface GenericDAO<T, Key extends Serializable> {
 	 * 
 	 * @throws BusinessExeption
 	 */
-	List<T> findAll(Class<T> clazz, Map<String, Object> params,
-			String orderProperty, boolean desc) throws BusinessExeption;
+	List<T> findAll(Class<T> clazz, Map<String, Object> params, String orderProperty, boolean desc)
+			throws BusinessExeption;
 
 	/**
 	 * Busca todos los elementos que cumplan con las condiciones indicadas en el
@@ -203,8 +194,7 @@ public interface GenericDAO<T, Key extends Serializable> {
 	 * @return lista de elementos
 	 * @throws BusinessExeption
 	 */
-	public List<T> findHql(Class<T> clazz, String hql,
-			Map<String, Object> params) throws BusinessExeption;
+	public List<T> findHql(Class<T> clazz, String hql, Map<String, Object> params) throws BusinessExeption;
 
 	/**
 	 * Busca los elementos aplicando el ejemplo recibido
@@ -268,8 +258,8 @@ public interface GenericDAO<T, Key extends Serializable> {
 	 * @return lista de elementos
 	 * @throws BusinessExeption
 	 */
-	List<T> executeNameQuery(String queryName, String[] nombreParametros,
-			Object[] valoresParametros) throws BusinessExeption;
+	List<T> executeNameQuery(String queryName, String[] nombreParametros, Object[] valoresParametros)
+			throws BusinessExeption;
 
 	/**
 	 * 
@@ -288,13 +278,12 @@ public interface GenericDAO<T, Key extends Serializable> {
 	 * @param sql
 	 *            estructura sql de la busqueda
 	 * @param params
-	 *            mapa de <nombre parÃ¡metro, valor> los cuales se aplican a
-	 *            la bÃºsqueda
+	 *            mapa de <nombre parÃ¡metro, valor> los cuales se aplican a la
+	 *            bÃºsqueda
 	 * @return lista de elementos
 	 * @throws BusinessExeption
 	 */
-	List<T> findSql(Class<T> clazz, String sql, Map<String, Object> params)
-			throws BusinessExeption;
+	List<T> findSql(Class<T> clazz, String sql, Map<String, Object> params) throws BusinessExeption;
 
 	/**
 	 * Busca todos los elementos que cumplan con las condiciones indicadas en el
@@ -308,13 +297,12 @@ public interface GenericDAO<T, Key extends Serializable> {
 	 * @param sql
 	 *            estructura sql de la busqueda
 	 * @param params
-	 *            mapa de <nombre parÃ¡metro, valor> los cuales se aplican a
-	 *            la búsqueda
+	 *            mapa de <nombre parÃ¡metro, valor> los cuales se aplican a la
+	 *            búsqueda
 	 * @return lista de elementos
 	 * @throws BusinessExeption
 	 */
-	<Z> List<Z> findSqlBean(Class<Z> clazz, String sql,
-			Map<String, Object> params) throws BusinessExeption;
+	<Z> List<Z> findSqlBean(Class<Z> clazz, String sql, Map<String, Object> params) throws BusinessExeption;
 
 	/**
 	 * Realiza consulta limitada por los parametros recibidos
@@ -331,9 +319,8 @@ public interface GenericDAO<T, Key extends Serializable> {
 	 *         elementos devueltos en la consulta
 	 * @throws BusinessExeption
 	 */
-	public <Z> PagingResult<Z> findCriteriaDinamicoPageResult(Class<Z> clazz,
-			DetachedCriteria detachedCriteria, int pageSize, int page)
-			throws BusinessExeption;
+	public <Z> PagingResult<Z> findCriteriaDinamicoPageResult(Class<Z> clazz, DetachedCriteria detachedCriteria,
+			int pageSize, int page) throws BusinessExeption;
 
 	/**
 	 * Realiza consulta limitada por los parametros recibidos
@@ -348,8 +335,7 @@ public interface GenericDAO<T, Key extends Serializable> {
 	 *         elementos devueltos en la consulta
 	 * @throws BusinessExeption
 	 */
-	PagingResult<T> findCriteriaDinamicoPageResult(
-			DetachedCriteria detachedCriteria, int pageSize, int page)
+	PagingResult<T> findCriteriaDinamicoPageResult(DetachedCriteria detachedCriteria, int pageSize, int page)
 			throws BusinessExeption;
 
 	/**
@@ -362,8 +348,7 @@ public interface GenericDAO<T, Key extends Serializable> {
 	 * @return Lista de elementos devueltos en la consulta
 	 * @throws BusinessExeption
 	 */
-	List<T> findCriteriaDinamico(DetachedCriteria detachedCriteria, int limit)
-			throws BusinessExeption;
+	List<T> findCriteriaDinamico(DetachedCriteria detachedCriteria, int limit) throws BusinessExeption;
 
 	/**
 	 * Realiza consulta limitada por los parametros recibidos
@@ -377,9 +362,8 @@ public interface GenericDAO<T, Key extends Serializable> {
 	 * @return Lista de elementos devueltos en la consulta
 	 * @throws BusinessExeption
 	 */
-	<Z> List<Z> findCriteriaDinamico(Class<Z> clazz, Projection projections,
-			DetachedCriteria detachedCriteria, int limit, int pageSize)
-			throws BusinessExeption;
+	<Z> List<Z> findCriteriaDinamico(Class<Z> clazz, Projection projections, DetachedCriteria detachedCriteria,
+			int limit, int pageSize) throws BusinessExeption;
 
 	/**
 	 * Realiza consulta limitada por los parametros recibidos
@@ -393,8 +377,7 @@ public interface GenericDAO<T, Key extends Serializable> {
 	 * @return Lista de elementos devueltos en la consulta
 	 * @throws BusinessExeption
 	 */
-	List<T> findCriteriaDinamico(DetachedCriteria detachedCriteria,
-			int pageSize, int page) throws BusinessExeption;
+	List<T> findCriteriaDinamico(DetachedCriteria detachedCriteria, int pageSize, int page) throws BusinessExeption;
 
 	/**
 	 * 
@@ -403,6 +386,8 @@ public interface GenericDAO<T, Key extends Serializable> {
 	 * solicitada, los valores extra se devuelven nulos "No se recomienda el uso
 	 * para acceder a datos muy grandes para la clase GenericDAOImpl"
 	 * 
+	 * 
+	 * @deprecated No se obtine un buen rendimiento
 	 * @param detachedCriteria
 	 * @param pageSize
 	 * @param page
@@ -410,32 +395,27 @@ public interface GenericDAO<T, Key extends Serializable> {
 	 * @throws BusinessExeption
 	 */
 	@Deprecated
-	List<T> findDetachedCriteriaFirst(DetachedCriteria detachedCriteria,
-			int pageSize, int page) throws BusinessExeption;
-
-	T findCriteriaDinamicouniqueResult(DetachedCriteria detachedCriteria,
-			int limit, int pageSize) throws BusinessExeption;
-
-	boolean findCriteriaDinamicoExist(DetachedCriteria detachedCriteria)
+	List<T> findDetachedCriteriaFirst(DetachedCriteria detachedCriteria, int pageSize, int page)
 			throws BusinessExeption;
+
+	T findCriteriaDinamicouniqueResult(DetachedCriteria detachedCriteria, int limit, int pageSize)
+			throws BusinessExeption;
+
+	boolean findCriteriaDinamicoExist(DetachedCriteria detachedCriteria) throws BusinessExeption;
 
 	<Z> Z save(Class<Z> clazz, Z obj) throws BusinessExeption;
 
 	<Z> void update(Class<Z> Z, Z obj) throws BusinessExeption;
 
-	<Z> List<Z> findCriteriaDinamico(Class<Z> clazz,
-			DetachedCriteria detachedCriteria, ResultTransformer transformers,
+	<Z> List<Z> findCriteriaDinamico(Class<Z> clazz, DetachedCriteria detachedCriteria, ResultTransformer transformers,
 			Projection projections) throws BusinessExeption;
 
-	<Z> Z findCriteriaDinamicouniqueResult(Class<Z> Z,
-			DetachedCriteria detachedCriteria,
-			ResultTransformer resultTransformer, Projection projection)
-			throws BusinessExeption;
+	<Z> Z findCriteriaDinamicouniqueResult(Class<Z> Z, DetachedCriteria detachedCriteria,
+			ResultTransformer resultTransformer, Projection projection) throws BusinessExeption;
 
 	<Z> void saveOrUpdate(Class<Z> clazz, Z obj) throws BusinessExeption;
 
 	<Z> void delete(Class<Z> clazz, Z obj) throws BusinessExeption;
 
-	<Z> void saveOrUpdateAll(Class<Z> clazz, List<Z> listaElementos)
-			throws BusinessExeption;
+	<Z> void saveOrUpdateAll(Class<Z> clazz, List<Z> listaElementos) throws BusinessExeption;
 }
