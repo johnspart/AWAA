@@ -239,13 +239,9 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 		try {
 
 			Query q = this.getSession().createQuery(hql);
-			if (params != null) {
-				Iterator<Entry<String, Object>> itParams = params.entrySet().iterator();
-				while (itParams.hasNext()) {
-					Map.Entry<String, Object> e = (Map.Entry<String, Object>) itParams.next();
-					q.setParameter(e.getKey(), e.getValue());
-				}
-			}
+			if (params != null)
+				for (Entry<String, Object> param : params.entrySet())
+					q.setParameter(param.getKey(), param.getValue());
 			int i = q.executeUpdate();
 
 			return i;
@@ -265,17 +261,16 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 			throws BusinessExeption {
 		try {
 			Query qr = this.getSession().createSQLQuery(sql).setResultTransformer(Transformers.aliasToBean(clazz));
-			if (params != null) {
-				for (Entry<String, Object> parm : params.entrySet()) {
+			if (params != null)
+				for (Entry<String, Object> parm : params.entrySet())
 					qr.setParameter(parm.getKey(), parm.getValue());
-				}
-			}
+
 			qr.isReadOnly();
 			return new ArrayList<Z>(qr.list());
 		} catch (Exception ex) {
 			handleException(ex);
 		}
-		return Collections.EMPTY_LIST;
+		return Collections.emptyList();
 	}
 
 	/**
@@ -298,7 +293,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 		} catch (Exception ex) {
 			handleException(ex);
 		}
-		return Collections.EMPTY_LIST;
+		return Collections.emptyList();
 	}
 
 	/**
@@ -319,7 +314,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 		} catch (Exception ex) {
 			handleException(ex);
 		}
-		return Collections.EMPTY_LIST;
+		return Collections.emptyList();
 	}
 
 	/**
@@ -365,7 +360,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 		} catch (Exception ex) {
 			handleException(ex);
 		}
-		return Collections.EMPTY_LIST;
+		return Collections.emptyList();
 	}
 
 	/**
@@ -401,7 +396,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 		} catch (Exception ex) {
 			handleException(ex);
 		}
-		return Collections.EMPTY_LIST;
+		return Collections.emptyList();
 	}
 
 	/**
@@ -436,7 +431,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 		} catch (Exception ex) {
 			handleException(ex);
 		}
-		return Collections.EMPTY_LIST;
+		return Collections.emptyList();
 	}
 
 	/**
