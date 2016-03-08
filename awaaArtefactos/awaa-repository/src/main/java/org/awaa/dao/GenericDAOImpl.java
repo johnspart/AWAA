@@ -497,30 +497,6 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@SuppressWarnings("unchecked")
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	@Override
-	public T findCriteriaDinamicouniqueResult(DetachedCriteria detachedCriteria, int pageSize, int page)
-			throws BusinessExeption {
-		try {
-			Criteria executableCriteria = detachedCriteria.getExecutableCriteria(this.getSession());
-			if (page > 0) {
-				executableCriteria.setFirstResult((page - 1) * pageSize);
-			}
-			if (pageSize > 0) {
-				executableCriteria.setMaxResults(pageSize);
-			}
-			return ((T) executableCriteria.uniqueResult());
-		} catch (Exception ex) {
-			handleException(ex);
-		}
-		return null;
-
-	}
-
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	@Override
@@ -548,75 +524,10 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	@Override
-	public List<T> findCriteriaDinamico(DetachedCriteria detachedCriteria, int pageSize, int page)
-			throws BusinessExeption {
-
-		List<T> tmpLst = new ArrayList<T>();
-		try {
-			Criteria executableCriteria = detachedCriteria.getExecutableCriteria(this.getSession());
-			if (page > 0) {
-				executableCriteria.setFirstResult((page - 1) * pageSize);
-			}
-			if (pageSize > 0) {
-				executableCriteria.setMaxResults(pageSize);
-			}
-			return executableCriteria.list();
-		} catch (Exception ex) {
-			handleException(ex);
-		}
-		return tmpLst;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@SuppressWarnings("unchecked")
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	@Override
 	public <Z> PagingResult<Z> findCriteriaDinamicoPageResult(Class<Z> clazz, DetachedCriteria detachedCriteria,
 			int pageSize, int page) throws BusinessExeption {
 		PagingResult<Z> pagingResult = new PagingResult<Z>();
 		List<Z> tmpLst = new ArrayList<Z>();
-		try {
-			Criteria executableCriteria = detachedCriteria.getExecutableCriteria(this.getSession());
-			if (page > 0) {
-				executableCriteria.setFirstResult((page - 1) * pageSize);
-			}
-			if (pageSize > 0) {
-				executableCriteria.setMaxResults(pageSize);
-			}
-			tmpLst = executableCriteria.list();
-
-			detachedCriteria.setProjection(Projections.rowCount());
-
-			executableCriteria = detachedCriteria.getExecutableCriteria(this.getSession());
-			if (page > 0) {
-				executableCriteria.setFirstResult(0);
-			}
-			if (pageSize > 0) {
-				executableCriteria.setMaxResults(0);
-			}
-			Long rwLst = (Long) executableCriteria.uniqueResult();
-
-			pagingResult.setList(tmpLst);
-			pagingResult.setRowsCount(rwLst);
-
-		} catch (Exception ex) {
-			handleException(ex);
-		}
-		return pagingResult;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@SuppressWarnings("unchecked")
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	@Override
-	public PagingResult<T> findCriteriaDinamicoPageResult(DetachedCriteria detachedCriteria, int pageSize, int page)
-			throws BusinessExeption {
-		PagingResult<T> pagingResult = new PagingResult<T>();
-		List<T> tmpLst = new ArrayList<T>();
 		try {
 			Criteria executableCriteria = detachedCriteria.getExecutableCriteria(this.getSession());
 			if (page > 0) {

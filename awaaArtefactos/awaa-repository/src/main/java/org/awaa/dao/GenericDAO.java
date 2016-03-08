@@ -207,22 +207,6 @@ public interface GenericDAO<T, Key extends Serializable> {
 	 * 
 	 * @param detachedCriteria
 	 *            manejador de la consulta
-	 * @param pageSize
-	 *            tamaño de la lista a devolver y a buscar
-	 * @param page
-	 *            pagina actual
-	 * @return Bean que contiene el numero de elemenstos totales y la lista de
-	 *         elementos devueltos en la consulta
-	 * @throws BusinessExeption
-	 */
-	PagingResult<T> findCriteriaDinamicoPageResult(DetachedCriteria detachedCriteria, int pageSize, int page)
-			throws BusinessExeption;
-
-	/**
-	 * Realiza consulta limitada por los parametros recibidos
-	 * 
-	 * @param detachedCriteria
-	 *            manejador de la consulta
 	 * @param limit
 	 *            tamaño de la lista a devolver y a buscar
 	 * @return Lista de elementos devueltos en la consulta
@@ -230,22 +214,6 @@ public interface GenericDAO<T, Key extends Serializable> {
 	 */
 	List<T> findCriteriaDinamico(DetachedCriteria detachedCriteria, int limit) throws BusinessExeption;
 
-	/**
-	 * Realiza consulta limitada por los parametros recibidos
-	 * 
-	 * @param detachedCriteria
-	 *            manejador de la consulta
-	 * @param pageSize
-	 *            tamaño de la lista a devolver y a buscar
-	 * @param page
-	 *            pagina actual
-	 * @return Lista de elementos devueltos en la consulta
-	 * @throws BusinessExeption
-	 */
-	List<T> findCriteriaDinamico(DetachedCriteria detachedCriteria, int pageSize, int page) throws BusinessExeption;
-
-	T findCriteriaDinamicouniqueResult(DetachedCriteria detachedCriteria, int limit, int pageSize)
-			throws BusinessExeption;
 
 	boolean findCriteriaDinamicoExist(DetachedCriteria detachedCriteria) throws BusinessExeption;
 
