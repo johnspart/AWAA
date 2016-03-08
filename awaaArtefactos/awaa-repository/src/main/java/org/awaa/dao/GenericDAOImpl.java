@@ -91,15 +91,6 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 	/**
 	 * {@inheritDoc}
 	 */
-	@Transactional(propagation = Propagation.REQUIRED)
-	public void delete(T obj) throws BusinessExeption {
-		try {
-			this.getSession().delete(obj);
-		} catch (Exception ex) {
-			handleException(ex);
-		}
-	}
-
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <Z> void delete(Class<Z> clazz, Z obj) throws BusinessExeption {
@@ -196,18 +187,6 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 	 * {@inheritDoc}
 	 */
 	@Transactional(propagation = Propagation.REQUIRED)
-	public T save(T obj) throws BusinessExeption {
-		try {
-
-			this.getSession().save(obj);
-
-		} catch (Exception ex) {
-			handleException(ex);
-		}
-		return obj;
-	}
-
-	@Transactional(propagation = Propagation.REQUIRED)
 	@Override
 	public <Z> Z save(Class<Z> clazz, Z obj) throws BusinessExeption {
 		try {
@@ -223,17 +202,6 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 	/**
 	 * {@inheritDoc}
 	 */
-	@Transactional(propagation = Propagation.REQUIRED)
-	public void update(T obj) throws BusinessExeption {
-		try {
-
-			this.getSession().update(obj);
-
-		} catch (Exception ex) {
-			handleException(ex);
-		}
-	}
-
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <Z> void update(Class<Z> Z, Z obj) throws BusinessExeption {
@@ -521,20 +489,6 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 			handleException(ex);
 		}
 		return Collections.EMPTY_LIST;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Transactional(propagation = Propagation.REQUIRED)
-	public void saveOrUpdateAll(List<T> listaElementos) throws BusinessExeption {
-		try {
-			for (T t : listaElementos) {
-				this.getSession().saveOrUpdate(t);
-			}
-		} catch (Exception ex) {
-			handleException(ex);
-		}
 	}
 
 	/**

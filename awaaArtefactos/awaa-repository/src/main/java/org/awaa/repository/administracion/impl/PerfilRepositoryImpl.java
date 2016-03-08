@@ -44,7 +44,7 @@ public class PerfilRepositoryImpl extends GenericDAOImpl<TPerfil, Long> implemen
 	public void removerPerfil(Perfil perfil) throws BusinessExeption {
 		TPerfil tPerfil = super.find(TPerfil.class, perfil.getIdPerfil());
 		if (tPerfil != null)
-			super.delete(tPerfil);
+			super.delete(TPerfil.class, tPerfil);
 	}
 
 	@Override

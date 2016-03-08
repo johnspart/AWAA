@@ -22,10 +22,11 @@ public interface GenericDAO<T, Key extends Serializable> {
 	/**
 	 * Elimina un elemento
 	 * 
-	 * @param elemento
+	 * @param clazz
+	 * @param obj
 	 * @throws BusinessExeption
 	 */
-	void delete(T obj) throws BusinessExeption;
+	<Z> void delete(Class<Z> clazz, Z obj) throws BusinessExeption;
 
 	/**
 	 * Busca un elemento por su identificador (clave primaria)
@@ -215,21 +216,13 @@ public interface GenericDAO<T, Key extends Serializable> {
 	T findByExample(T ejemplo) throws BusinessExeption;
 
 	/**
-	 * Guarda el elemento.
+	 * Realiza la actualización del elemento +
 	 * 
-	 * @param obj
-	 * @return T
-	 * @throws BusinessExeption
-	 */
-	T save(T obj) throws BusinessExeption;
-
-	/**
-	 * Realiza la actualizaciÃ³n del elemento
-	 * 
+	 * @param Z
 	 * @param obj
 	 * @throws BusinessExeption
 	 */
-	void update(T obj) throws BusinessExeption;
+	<Z> void update(Class<Z> Z, Z obj) throws BusinessExeption;
 
 	/**
 	 * Guarda o actualiza el elemento, segÃºn aplique.
@@ -238,14 +231,6 @@ public interface GenericDAO<T, Key extends Serializable> {
 	 * @throws BusinessExeption
 	 */
 	void saveOrUpdate(T obj) throws BusinessExeption;
-
-	/**
-	 * Almacena o actualiza todos los elementos de la colecciÃ³n.
-	 * 
-	 * @param listaElementos
-	 * @throws BusinessExeption
-	 */
-	void saveOrUpdateAll(List<T> listaElementos) throws BusinessExeption;
 
 	/**
 	 * Realiza la ejecución de la NamedQuery especificada con el
@@ -334,7 +319,6 @@ public interface GenericDAO<T, Key extends Serializable> {
 	 */
 	List<T> findCriteriaDinamico(DetachedCriteria detachedCriteria, int limit) throws BusinessExeption;
 
-
 	/**
 	 * Realiza consulta limitada por los parametros recibidos
 	 * 
@@ -349,15 +333,19 @@ public interface GenericDAO<T, Key extends Serializable> {
 	 */
 	List<T> findCriteriaDinamico(DetachedCriteria detachedCriteria, int pageSize, int page) throws BusinessExeption;
 
-
 	T findCriteriaDinamicouniqueResult(DetachedCriteria detachedCriteria, int limit, int pageSize)
 			throws BusinessExeption;
 
 	boolean findCriteriaDinamicoExist(DetachedCriteria detachedCriteria) throws BusinessExeption;
 
+	/**
+	 * Guarda el elemento.
+	 * 
+	 * @param obj
+	 * @return Z
+	 * @throws BusinessExeption
+	 */
 	<Z> Z save(Class<Z> clazz, Z obj) throws BusinessExeption;
-
-	<Z> void update(Class<Z> Z, Z obj) throws BusinessExeption;
 
 	<Z> List<Z> findCriteriaDinamico(Class<Z> clazz, DetachedCriteria detachedCriteria, ResultTransformer transformers,
 			Projection projections) throws BusinessExeption;
@@ -366,8 +354,6 @@ public interface GenericDAO<T, Key extends Serializable> {
 			ResultTransformer resultTransformer, Projection projection) throws BusinessExeption;
 
 	<Z> void saveOrUpdate(Class<Z> clazz, Z obj) throws BusinessExeption;
-
-	<Z> void delete(Class<Z> clazz, Z obj) throws BusinessExeption;
 
 	<Z> void saveOrUpdateAll(Class<Z> clazz, List<Z> listaElementos) throws BusinessExeption;
 }
