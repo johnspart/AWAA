@@ -271,22 +271,6 @@ public interface GenericDAO<T, Key extends Serializable> {
 
 	/**
 	 * Busca todos los elementos que cumplan con las condiciones indicadas en el
-	 * atributo <code>params</code>
-	 * 
-	 * @param clazz
-	 *            representa la clase del elemento a buscar
-	 * @param sql
-	 *            estructura sql de la busqueda
-	 * @param params
-	 *            mapa de <nombre parÃ¡metro, valor> los cuales se aplican a la
-	 *            bÃºsqueda
-	 * @return lista de elementos
-	 * @throws BusinessExeption
-	 */
-	List<T> findSql(Class<T> clazz, String sql, Map<String, Object> params) throws BusinessExeption;
-
-	/**
-	 * Busca todos los elementos que cumplan con las condiciones indicadas en el
 	 * atributo <code>params</code> y transforma la salida a una clase que no es
 	 * de tipo entidad
 	 * 
@@ -350,20 +334,6 @@ public interface GenericDAO<T, Key extends Serializable> {
 	 */
 	List<T> findCriteriaDinamico(DetachedCriteria detachedCriteria, int limit) throws BusinessExeption;
 
-	/**
-	 * Realiza consulta limitada por los parametros recibidos
-	 * 
-	 * @param detachedCriteria
-	 *            manejador de la consulta
-	 * @param pageSize
-	 *            tamaño de la lista a devolver y a buscar
-	 * @param page
-	 *            pagina actual
-	 * @return Lista de elementos devueltos en la consulta
-	 * @throws BusinessExeption
-	 */
-	<Z> List<Z> findCriteriaDinamico(Class<Z> clazz, Projection projections, DetachedCriteria detachedCriteria,
-			int limit, int pageSize) throws BusinessExeption;
 
 	/**
 	 * Realiza consulta limitada por los parametros recibidos
@@ -379,24 +349,6 @@ public interface GenericDAO<T, Key extends Serializable> {
 	 */
 	List<T> findCriteriaDinamico(DetachedCriteria detachedCriteria, int pageSize, int page) throws BusinessExeption;
 
-	/**
-	 * 
-	 * Realiza consulta limitada por los parametros recibidos y devuelve
-	 * lacantidad de filas encontrada pero solo contienen valores la pagina
-	 * solicitada, los valores extra se devuelven nulos "No se recomienda el uso
-	 * para acceder a datos muy grandes para la clase GenericDAOImpl"
-	 * 
-	 * 
-	 * @deprecated No se obtine un buen rendimiento
-	 * @param detachedCriteria
-	 * @param pageSize
-	 * @param page
-	 * @return lista de elementos
-	 * @throws BusinessExeption
-	 */
-	@Deprecated
-	List<T> findDetachedCriteriaFirst(DetachedCriteria detachedCriteria, int pageSize, int page)
-			throws BusinessExeption;
 
 	T findCriteriaDinamicouniqueResult(DetachedCriteria detachedCriteria, int limit, int pageSize)
 			throws BusinessExeption;

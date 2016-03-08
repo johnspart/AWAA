@@ -326,26 +326,6 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	@Override
-	public List<T> findSql(Class<T> clazz, final String sql, final Map<String, Object> params) throws BusinessExeption {
-		try {
-			Query qr = this.getSession().createSQLQuery(sql).addEntity(clazz);
-			for (Entry<String, Object> parm : params.entrySet()) {
-				qr.setParameter(parm.getKey(), parm.getValue());
-			}
-			qr.isReadOnly();
-			return qr.list();
-		} catch (Exception ex) {
-			handleException(ex);
-		}
-		return Collections.EMPTY_LIST;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@SuppressWarnings("unchecked")
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	@Override
 	public <Z> List<Z> findSqlBean(Class<Z> clazz, final String sql, final Map<String, Object> params)
 			throws BusinessExeption {
 		try {
@@ -667,35 +647,6 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@SuppressWarnings("unchecked")
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	@Override
-	public <Z> List<Z> findCriteriaDinamico(Class<Z> clazz, Projection projections, DetachedCriteria detachedCriteria,
-			int pageSize, int page) throws BusinessExeption {
-		detachedCriteria.setProjection(projections);
-		detachedCriteria.setResultTransformer(Transformers.aliasToBean(clazz));
-		List<Z> tmpLst = new ArrayList<Z>();
-		try {
-			Criteria executableCriteria = detachedCriteria.getExecutableCriteria(this.getSession());
-
-			if (page > 0) {
-				executableCriteria.setFirstResult((page - 1) * pageSize);
-			}
-			if (pageSize > 0) {
-				executableCriteria.setMaxResults(pageSize);
-			}
-
-			return executableCriteria.list();
-		} catch (Exception ex) {
-			handleException(ex);
-		}
-		return tmpLst;
-
-	}
-
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	@Override
@@ -863,45 +814,6 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 			handleException(ex);
 		}
 		return pagingResult;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Deprecated
-	@SuppressWarnings("unchecked")
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	@Override
-	public List<T> findDetachedCriteriaFirst(DetachedCriteria detachedCriteria, int pageSize, int page)
-			throws BusinessExeption {
-		List<T> tmpLst = new ArrayList<T>();
-		try {
-			Criteria executableCriteria = detachedCriteria.getExecutableCriteria(this.getSession());
-			if (page > 0) {
-				executableCriteria.setFirstResult((page - 1) * pageSize);
-			}
-			if (pageSize > 0) {
-				executableCriteria.setMaxResults(pageSize);
-			}
-			tmpLst = executableCriteria.list();
-
-			detachedCriteria.setProjection(Projections.rowCount());
-
-			executableCriteria = detachedCriteria.getExecutableCriteria(this.getSession());
-			Long rwLst = (Long) executableCriteria.uniqueResult();
-
-			List<T> lst = new ArrayList<T>(rwLst.intValue());
-			int il = (page - 1) * pageSize;
-			int iMin = rwLst.intValue() - pageSize;
-			for (int i = 0; i < iMin; i++) {
-				lst.add(null);
-			}
-			lst.addAll(il, tmpLst);
-			return lst;
-		} catch (Exception ex) {
-			handleException(ex);
-		}
-		return new ArrayList<T>(0);
 	}
 
 	/**
