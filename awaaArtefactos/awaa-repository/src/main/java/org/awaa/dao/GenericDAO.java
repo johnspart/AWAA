@@ -56,53 +56,6 @@ public interface GenericDAO<T, Key extends Serializable> {
 	List<T> findCriteriaDinamico(DetachedCriteria detachedCriteria) throws BusinessExeption;
 
 	/**
-	 * Busca todos los elementos.
-	 * 
-	 * @param clazz
-	 *            representa la clase del elemento a buscar
-	 * @return lista de elementos
-	 * @throws BusinessExeption
-	 */
-	List<T> findAll(Class<T> clazz) throws BusinessExeption;
-
-	/**
-	 * Busca todos los elementos, aplicando la condiciÃ³n especificada en la
-	 * variable <code>filter</code>
-	 * 
-	 * @param clazz
-	 *            representa la clase del elemento a buscar
-	 * @param filter
-	 *            condición a aplicar a la bÃºsqueda
-	 * @return lista de elementos
-	 * @throws BusinessExeption
-	 */
-	List<T> findAll(Class<T> clazz, String filter) throws BusinessExeption;
-
-	/**
-	 * Busca elementos deacuerdo al sql recibido
-	 * 
-	 * @param clazz
-	 *            representa la clase del elemento a buscar
-	 * @param sql
-	 *            condición a aplicar a la bÃºsqueda
-	 * @return lista de elementos
-	 * @throws BusinessExeption
-	 */
-	public List<T> findAllSql(Class<T> clazz, final String sql) throws BusinessExeption;
-
-	/**
-	 * Busca elementos deacuerdo al hql recibido
-	 * 
-	 * @param clazz
-	 *            representa la clase del elemento a buscar
-	 * @param hql
-	 *            condición a aplicar a la bÃºsqueda
-	 * @return lista de elementos
-	 * @throws BusinessExeption
-	 */
-	public List<T> findHql(Class<T> clazz, String hql) throws BusinessExeption;
-
-	/**
 	 * Actualiza elementos deacuerdo al sql recibido
 	 * 
 	 * @param clazz
@@ -128,40 +81,6 @@ public interface GenericDAO<T, Key extends Serializable> {
 	List<T> findAll(Class<T> clazz, String filter, String order) throws BusinessExeption;
 
 	/**
-	 * Busca todos los elementos que cumplan con las condiciones indicadas en el
-	 * atributo <code>params</code>
-	 * 
-	 * @param clazz
-	 *            representa la clase del elemento a buscar
-	 * @param params
-	 *            mapa de <nombre parÃ¡metro, valor> los cuales se aplican a la
-	 *            bÃºsqueda
-	 * @return lista de elementos mapa de <nombre parÃ¡metro, valor> los cuales
-	 *         se aplican a la bÃºsqueda
-	 * @return lista de elementos
-	 * @throws BusinessExeption
-	 */
-	List<T> findAll(Class<T> clazz, Map<String, Object> params) throws BusinessExeption;
-
-	/**
-	 * Busca todos los elementos que cumplan con las condiciones indicadas en el
-	 * atributo <code>params</code>
-	 * 
-	 * @param clazz
-	 *            representa la clase del elemento a buscar
-	 * @param params
-	 *            mapa de <nombre parÃ¡metro, valor> los cuales se aplican a la
-	 *            búsqueda
-	 * @param orderProperty
-	 *            nombre del o los atributo por el cual se debe ordenar el
-	 *            resultado. El orden es ascendente
-	 * @return lista de elementos
-	 * 
-	 * @throws BusinessExeption
-	 */
-	List<T> findAll(Class<T> clazz, Map<String, Object> params, String orderProperty) throws BusinessExeption;
-
-	/**
 	 * @param clazz
 	 *            representa la clase del elemento a buscar
 	 * @param params
@@ -178,7 +97,7 @@ public interface GenericDAO<T, Key extends Serializable> {
 	 * 
 	 * @throws BusinessExeption
 	 */
-	List<T> findAll(Class<T> clazz, Map<String, Object> params, String orderProperty, boolean desc)
+	List<T> findParams(Class<T> clazz, Map<String, Object> params, String orderProperty, boolean desc)
 			throws BusinessExeption;
 
 	/**
@@ -223,14 +142,6 @@ public interface GenericDAO<T, Key extends Serializable> {
 	 * @throws BusinessExeption
 	 */
 	<Z> void update(Class<Z> Z, Z obj) throws BusinessExeption;
-
-	/**
-	 * Guarda o actualiza el elemento, segÃºn aplique.
-	 * 
-	 * @param obj
-	 * @throws BusinessExeption
-	 */
-	void saveOrUpdate(T obj) throws BusinessExeption;
 
 	/**
 	 * Realiza la ejecución de la NamedQuery especificada con el

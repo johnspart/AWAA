@@ -34,7 +34,7 @@ public class PerfilRepositoryImpl extends GenericDAOImpl<TPerfil, Long> implemen
 		tPerfil.setPrfDescripcion(perfil.getDescripcion());
 		tPerfil.setAuditoria(new Auditoria(usuario));
 
-		super.saveOrUpdate(tPerfil);
+		super.saveOrUpdate(TPerfil.class, tPerfil);
 
 		perfil.setIdPerfil(tPerfil.getPrfId());
 		return perfil;

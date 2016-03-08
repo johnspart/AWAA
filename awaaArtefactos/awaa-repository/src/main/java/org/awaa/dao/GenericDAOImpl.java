@@ -258,39 +258,6 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 	/**
 	 * {@inheritDoc}
 	 */
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	@SuppressWarnings("unchecked")
-	public List<T> findAll(Class<T> clazz, String filter) throws BusinessExeption {
-		try {
-			StringBuilder sb = new StringBuilder("from ").append(clazz.getSimpleName());
-			if (!StringUtils.isEmpty(filter)) {
-				sb.append(" where ").append(filter);
-			}
-			return this.getSession().createCriteria(sb.toString()).list();
-		} catch (Exception ex) {
-			handleException(ex);
-		}
-		return Collections.EMPTY_LIST;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	@SuppressWarnings("unchecked")
-	public List<T> findAllSql(final Class<T> clazz, final String sql) throws BusinessExeption {
-		try {
-			Query query = this.getSession().createSQLQuery(sql).addEntity(clazz);
-			return query.list();
-		} catch (Exception ex) {
-			handleException(ex);
-		}
-		return Collections.EMPTY_LIST;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	@Override
@@ -316,31 +283,14 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public List<T> findHql(Class<T> clazz, String hql) throws BusinessExeption {
-		try {
-			if (!StringUtils.isEmpty(hql)) {
-				return this.getSession().createQuery(hql).list();
-			}
-		} catch (Exception ex) {
-			handleException(ex);
-		}
-		return Collections.EMPTY_LIST;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@SuppressWarnings("unchecked")
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	public List<T> findHql(Class<T> clazz, String hql, Map<String, Object> params) throws BusinessExeption {
 		try {
 			if (!StringUtils.isEmpty(hql)) {
 				Query q = this.getSession().createQuery(hql);
-				Iterator<Entry<String, Object>> itParams = params.entrySet().iterator();
-				while (itParams.hasNext()) {
-					Map.Entry<String, Object> e = (Map.Entry<String, Object>) itParams.next();
-					q.setParameter(e.getKey(), e.getValue());
-				}
+				if (params != null)
+					for (Entry<String, Object> param : params.entrySet())
+						q.setParameter(param.getKey(), param.getValue());
+
 				return q.list();
 			} else {
 				return this.getSession().createCriteria(clazz).list();
@@ -375,20 +325,6 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 	/**
 	 * {@inheritDoc}
 	 */
-	@Transactional(propagation = Propagation.REQUIRED)
-	public void saveOrUpdate(T obj) throws BusinessExeption {
-		try {
-
-			this.getSession().saveOrUpdate(obj);
-
-		} catch (Exception ex) {
-			handleException(ex);
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
 	public <Z> void saveOrUpdate(Class<Z> clazz, Z obj) throws BusinessExeption {
@@ -406,66 +342,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 	 */
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public List<T> findAll(Class<T> clazz, Map<String, Object> params) throws BusinessExeption {
-		try {
-			DetachedCriteria crit = DetachedCriteria.forClass(clazz);
-			if (params != null) {
-				Set<Entry<String, Object>> setParams = params.entrySet();
-				Iterator<Entry<String, Object>> itParams = setParams.iterator();
-				while (null != itParams && itParams.hasNext()) {
-					Entry<String, Object> entry = itParams.next();
-					if (String.class.isAssignableFrom(entry.getValue().getClass())) {
-						crit.add(Restrictions.like(entry.getKey(), entry.getValue()));
-					} else {
-						crit.add(Restrictions.eq(entry.getKey(), entry.getValue()));
-					}
-				}
-			}
-			Criteria criteria = crit.getExecutableCriteria(this.getSession());
-
-			return criteria.list();
-		} catch (Exception ex) {
-			handleException(ex);
-		}
-		return Collections.EMPTY_LIST;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@SuppressWarnings("unchecked")
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public List<T> findAll(Class<T> clazz, Map<String, Object> params, String orderProperty) throws BusinessExeption {
-		try {
-			DetachedCriteria crit = DetachedCriteria.forClass(clazz);
-			Set<Entry<String, Object>> setParams = params.entrySet();
-			Iterator<Entry<String, Object>> itParams = setParams.iterator();
-			while (null != itParams && itParams.hasNext()) {
-				Entry<String, Object> entry = itParams.next();
-				if (String.class.isAssignableFrom(entry.getValue().getClass())) {
-					crit.add(Restrictions.like(entry.getKey(), entry.getValue()));
-				} else {
-					crit.add(Restrictions.eq(entry.getKey(), entry.getValue()));
-				}
-			}
-			if (!StringUtils.isEmpty(orderProperty)) {
-				crit.addOrder(Order.asc(orderProperty));
-			}
-			Criteria criteria = crit.getExecutableCriteria(this.getSession());
-
-			return criteria.list();
-		} catch (Exception ex) {
-			handleException(ex);
-		}
-		return Collections.EMPTY_LIST;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@SuppressWarnings("unchecked")
-	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
-	public List<T> findAll(Class<T> clazz, Map<String, Object> params, String orderProperty, boolean desc)
+	public List<T> findParams(Class<T> clazz, Map<String, Object> params, String orderProperty, boolean desc)
 			throws BusinessExeption {
 		try {
 			DetachedCriteria crit = DetachedCriteria.forClass(clazz);
