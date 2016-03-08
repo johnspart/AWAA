@@ -7,6 +7,10 @@ public abstract class Logs {
 	private static final Logger info = LoggerFactory.getLogger(Logs.class);
 	private static final Logger error = LoggerFactory.getLogger(Logs.class);
 
+	private Logs() {
+		super();
+	}
+
 	public static void logError(String message, Exception e) throws Exception {
 		error.debug(message, e);
 		e.printStackTrace();

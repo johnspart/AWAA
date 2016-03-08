@@ -3,6 +3,7 @@
  */
 package org.awaa.controller.administracion;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.awaa.services.administracion.PerfilService;
@@ -35,8 +36,7 @@ public class PerfilController {
 			return this.perfilService.getPerfiles();
 		} catch (Exception e) {
 			Logs.getError().error(e.getMessage(), e);
-			e.printStackTrace();
-			return null;
+			return Collections.emptyList();
 		}
 	}
 
@@ -47,8 +47,7 @@ public class PerfilController {
 			return this.perfilService.getPermisosPerfil(new Perfil(idPerfil));
 		} catch (Exception e) {
 			Logs.getError().error(e.getMessage(), e);
-			e.printStackTrace();
-			return null;
+			return Collections.emptyList();
 		}
 	}
 }

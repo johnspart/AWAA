@@ -11,6 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.awwa.utils.logs.Logs;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -42,7 +43,7 @@ public class CorsFilter implements Filter {
 				response.getWriter().print("OK");
 				response.getWriter().flush();
 			} catch (IOException e) {
-				e.printStackTrace();
+				Logs.getError().error(e.getMessage(), e);
 			}
 		} else {
 			chain.doFilter(request, response);
@@ -52,7 +53,6 @@ public class CorsFilter implements Filter {
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
 		// TODO Auto-generated method stub
-
 	}
 
 }
