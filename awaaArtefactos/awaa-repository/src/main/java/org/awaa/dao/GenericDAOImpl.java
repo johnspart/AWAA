@@ -36,8 +36,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-;
-
 /**
  * Represents the Data Access Object class, and defines the generic interaction
  * between the system and the database.
@@ -190,9 +188,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 	@Override
 	public <Z> Z save(Class<Z> clazz, Z obj) throws BusinessExeption {
 		try {
-
 			this.getSession().save(obj);
-
 		} catch (Exception ex) {
 			handleException(ex);
 		}
@@ -204,11 +200,9 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 	 */
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED)
-	public <Z> void update(Class<Z> Z, Z obj) throws BusinessExeption {
+	public <Z> void update(Class<Z> clazz, Z obj) throws BusinessExeption {
 		try {
-
 			this.getSession().update(obj);
-
 		} catch (Exception ex) {
 			handleException(ex);
 		}
@@ -220,11 +214,8 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 	@Transactional(propagation = Propagation.REQUIRED)
 	public Integer saveOrUpdateSql(Class<T> clazz, final String sql) throws BusinessExeption {
 		try {
-
 			Query q = getSession().createSQLQuery(sql);
-			int i = q.executeUpdate();
-
-			return i;
+			return q.executeUpdate();
 		} catch (Exception ex) {
 			handleException(ex);
 		}
@@ -242,9 +233,8 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 			if (params != null)
 				for (Entry<String, Object> param : params.entrySet())
 					q.setParameter(param.getKey(), param.getValue());
-			int i = q.executeUpdate();
 
-			return i;
+			return q.executeUpdate();
 		} catch (Exception ex) {
 			handleException(ex);
 		}
@@ -495,7 +485,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 	@SuppressWarnings("unchecked")
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = true)
 	@Override
-	public <Z> Z findCriteriaDinamicouniqueResult(Class<Z> Z, DetachedCriteria detachedCriteria,
+	public <Z> Z findCriteriaDinamicouniqueResult(Class<Z> clazz, DetachedCriteria detachedCriteria,
 			ResultTransformer resultTransformer, Projection projection) throws BusinessExeption {
 		try {
 			if (projection != null)
@@ -505,7 +495,7 @@ public class GenericDAOImpl<T, Key extends Serializable> implements GenericDAO<T
 
 			Criteria executableCriteria = detachedCriteria.getExecutableCriteria(this.getSession());
 			executableCriteria.setMaxResults(1);
-			return ((Z) executableCriteria.uniqueResult());
+			return (Z) executableCriteria.uniqueResult();
 		} catch (Exception ex) {
 			handleException(ex);
 		}
