@@ -15,7 +15,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.exceptions.base.MockitoAssertionError;
 import org.mockito.runners.MockitoJUnitRunner;
+
+import junit.framework.Assert;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestPerfilService {
@@ -35,9 +38,8 @@ public class TestPerfilService {
 		Perfil perfil = DatosPerfil.getPerfils().get(0);
 		perfil.setIdPerfil(null);
 		Perfil perfil2 = DatosPerfil.getPerfils().get(0);
-		Mockito.when(perfilService.almacenarPerfil(perfil, USER_ACTION.getCodigo())).thenReturn(perfil);
-		perfil2 = perfilService.almacenarPerfil(perfil, USER_ACTION.getCodigo());
-		System.out.println("ID=" + perfil2.getIdPerfil());
+		Mockito.when(perfilService.almacenarPerfil(perfil, USER_ACTION.getCodigo())).thenReturn(perfil2);
+		perfil = perfilService.almacenarPerfil(perfil, USER_ACTION.getCodigo());
 	}
 
 	/**
