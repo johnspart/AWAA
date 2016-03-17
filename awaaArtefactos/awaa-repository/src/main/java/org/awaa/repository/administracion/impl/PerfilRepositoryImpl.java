@@ -24,7 +24,7 @@ import org.springframework.stereotype.Repository;
  * @author John
  *
  */
-@Repository
+@Repository("PerfilRepository")
 public class PerfilRepositoryImpl extends GenericDAOImpl<TPerfil, Long> implements PerfilRepository {
 
 	@Override
@@ -67,5 +67,20 @@ public class PerfilRepositoryImpl extends GenericDAOImpl<TPerfil, Long> implemen
 
 		return super.findCriteriaDinamico(Permiso.class, dCriteria, DetachedCriteria.PROJECTION,
 				Projections.property("pfpPermiso"));
+	}
+
+	@Override
+	public Perfil getPerfilById(Long idPerfil) throws BusinessExeption {
+		DetachedCriteria dCriteria = DetachedCriteria.forClass(TPerfil.class, "PRF");
+
+		dCriteria.add(Restrictions.eq("PRF.prfId", idPerfil));
+
+		ProjectionList prjLst = Projections.projectionList();
+		prjLst.add(Projections.property("PRF.prfId"), "idPerfil");
+		prjLst.add(Projections.property("PRF.prfPerfil"), "perfil");
+		prjLst.add(Projections.property("PRF.prfDescripcion"), "descripcion");
+
+		return super.findCriteriaDinamicouniqueResult(Perfil.class, dCriteria, Transformers.aliasToBean(Perfil.class),
+				prjLst);
 	}
 }

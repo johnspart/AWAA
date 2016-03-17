@@ -42,4 +42,9 @@ public class PerfilServiceImpl implements PerfilService {
 	public List<Permiso> getPermisosPerfil(Perfil perfil) throws BusinessExeption {
 		return this.perfilRepository.getPermisosPerfil(perfil);
 	}
+
+	@Override
+	public Perfil getPerfilById(Long idPerfil) throws BusinessExeption {
+		return this.perfilRepository.getPerfilById(idPerfil);
+	}
 }

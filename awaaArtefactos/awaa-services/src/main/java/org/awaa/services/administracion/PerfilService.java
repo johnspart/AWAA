@@ -23,4 +23,6 @@ public interface PerfilService {
 
 	List<Permiso> getPermisosPerfil(Perfil perfil) throws BusinessExeption;
 
+	Perfil getPerfilById(Long idPerfil) throws BusinessExeption;
+
 }

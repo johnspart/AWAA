@@ -19,6 +19,13 @@ public class Perfil {
 		this.idPerfil = idPerfil;
 	}
 
+	public Perfil(Long idPerfil, String perfil, String descripcion) {
+		super();
+		this.idPerfil = idPerfil;
+		this.perfil = perfil;
+		this.descripcion = descripcion;
+	}
+
 	/**
 	 * @return the idPerfil
 	 */
