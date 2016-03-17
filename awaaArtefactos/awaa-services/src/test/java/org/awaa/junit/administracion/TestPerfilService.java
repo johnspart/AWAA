@@ -36,7 +36,7 @@ public class TestPerfilService {
 		perfil.setIdPerfil(null);
 		Perfil perfil2 = DatosPerfil.getPerfils().get(0);
 		Mockito.when(perfilService.almacenarPerfil(perfil, USER_ACTION.getCodigo())).thenReturn(perfil);
-		perfil2 = perfilService.getPerfilById(perfil.getIdPerfil());
+		perfil2 = perfilService.almacenarPerfil(perfil, USER_ACTION.getCodigo());
 		System.out.println("ID=" + perfil2.getIdPerfil());
 	}
 
