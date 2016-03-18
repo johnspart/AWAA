@@ -33,19 +33,18 @@ repositories {
 	jcenter()
 }
 
-test.dependsOn(":awaa-services:test", ":awaa-repository:test", ":awaa-utils:test")
+compileJava {options.encoding = "UTF-8"}
+compileTestJava {options.encoding = "UTF-8"}
 
 // In this section you declare the dependencies for your production and test code
 dependencies {
-	compile project(':awaa-services')
-	deploy project(':awaa-services')
-	testCompile project(':awaa-services')
-	compile project(':awaa-repository')
-	dploy project(':awaa-repository')
-	testCompile project(':awaa-repository')
-	compile project(':awaa-utils')
-	deploy project(':awaa-utils')
-	testCompile project(':awaa-utils')
+	compile project(path:':awaa-services', configuration:'archives')
+	compile project(path:':awaa-repository', configuration:'archives')
+	compile project(path:':awaa-utils', configuration:'archives')
+	
+	testCompile project(path:':awaa-services', configuration:'archives')
+	testCompile project(path:':awaa-repository', configuration:'archives')
+	testCompile project(path:':awaa-utils', configuration:'archives')
 	
 	compile 'org.springframework:spring-webmvc:4.2.3.RELEASE'
 	

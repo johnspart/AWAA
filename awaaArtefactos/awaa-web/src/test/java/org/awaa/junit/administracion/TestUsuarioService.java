@@ -19,14 +19,14 @@ public class TestUsuarioService extends TestCase {
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@BeforeClass
+	//@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
 
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@AfterClass
+	//@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 	}
 
@@ -35,7 +35,7 @@ public class TestUsuarioService extends TestCase {
 	 * 
 	 * @see junit.framework.TestCase#setUp()
 	 */
-	@Before
+	//@Before
 	protected void setUp() throws Exception {
 		super.setUp();
 	}
@@ -45,7 +45,7 @@ public class TestUsuarioService extends TestCase {
 	 * 
 	 * @see junit.framework.TestCase#tearDown()
 	 */
-	@After
+	//@After
 	protected void tearDown() throws Exception {
 		super.tearDown();
 	}

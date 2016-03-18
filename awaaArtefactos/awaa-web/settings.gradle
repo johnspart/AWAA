@@ -1,3 +1,1 @@
-include 'awaa-services'
-include 'awaa-repository'
-include 'awaa-utils'
+includeFlat 'awaa-services','awaa-repository','awaa-utils'
