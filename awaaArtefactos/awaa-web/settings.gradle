@@ -1,1 +1,1 @@
-includeFlat 'awaa-services','awaa-repository','awaa-utils'
+include ':awaa-services',':awaa-repository',':awaa-utils'
