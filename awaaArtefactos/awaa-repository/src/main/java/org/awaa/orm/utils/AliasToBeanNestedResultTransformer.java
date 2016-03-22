@@ -87,8 +87,7 @@ public class AliasToBeanNestedResultTransformer extends AliasedTupleSubsetResult
 					((List<Object>) subclassToAlias.get(subclass).get(0)).toArray(),
 					((List<Object>) subclassToAlias.get(subclass).get(1)).toArray(new String[0]));
 
-			//TODO Falta implementar el seter por refection
-			//accessor.getSetter(resultClass, (String) subclassToAlias.get(subclass).get(2)).set(root, subObject, null);
+			//TODO Falta implementar el seter por reflection
 		}
 
 		return root;
