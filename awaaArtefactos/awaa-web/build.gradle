@@ -13,7 +13,6 @@ apply plugin: 'war'
 apply plugin: 'eclipse'
 apply plugin: 'eclipse-wtp'
 apply plugin: 'jacoco'
-apply plugin: 'maven'
 
 group = 'org.awaa.web'
 
@@ -83,12 +82,11 @@ test {
 //Artifactory Config
 buildscript {
     repositories {
-    	jcenter()
         maven {
             url 'http://localhost:8091/artifactory/DevOps-virtual'
             credentials {
-                username = "admin"
-                password = "password"
+                username = "${artifactory_user}"
+                password = "${artifactory_password}"
             }
         }
         
@@ -103,32 +101,22 @@ allprojects {
     apply plugin: "com.jfrog.artifactory"
 }
 
-configurations {
-  published
-}
-
 artifactory {
-    contextUrl = "http://localhost:8091/artifactory"   //The base Artifactory URL if not overridden by the publisher/resolver
+    contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL if not overridden by the publisher/resolver
     publish {
         repository {
             repoKey = 'DevOps_Repository'
-            username = "admin"
-            password = "password"
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
             maven = true
-            
-            ivy {
-		        ivyLayout = '[organization]/[module]/ivy-[revision].xml'
-		        artifactLayout = '[organization]/[module]/[revision]/[module]-[revision](-[classifier]).[ext]'
-		        mavenCompatible = true //Convert any dots in an [organization] layout value to path separators, similar to Maven's groupId-to-path conversion. True if not specified
-			}
             
         }
     }
     resolve {
         repository {
             repoKey = 'DevOps-virtual'
-            username = "admin"
-            password = "password"
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
             maven = true
             
         }
