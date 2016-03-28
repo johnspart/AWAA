@@ -54,10 +54,3 @@ dependencies {
     testCompile "org.mockito:mockito-core:1.+"
 }
 
-publishing{
-	publications {
-		mavenJava(MavenPublication){
-			from components.java
-		}
-	}
-}
