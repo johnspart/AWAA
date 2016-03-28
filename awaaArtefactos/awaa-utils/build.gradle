@@ -38,3 +38,11 @@ test {
     systemProperties 'property': 'value'
 }
 
+publishing{
+	publications {
+		mavenJava(MavenPublication){
+			from components.java
+		}
+	}
+}
+
